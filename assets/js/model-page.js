@@ -158,6 +158,51 @@ function showStatus(ctx, titleKey, messageKey) {
 }
 
 /**
+ * طبقة مساعدة لقراءة قيم المتطلبات من أكثر من schema
+ * - تدعم وجود الحقول داخل requirements أو hardware أو system أو على المستوى الجذري للنموذج
+ * - توفر قيمة افتراضية \"غير محدد\" عند غياب كل القيم
+ */
+function isValidValue(v) {
+  return v !== null && v !== undefined && String(v).trim() !== "";
+}
+
+function pickFirst(...vals) {
+  for (const v of vals) {
+    if (isValidValue(v)) return v;
+  }
+  return null;
+}
+
+function getReqValue(model, keys) {
+  const req = model && model.requirements ? model.requirements : null;
+  const hw = model && model.hardware ? model.hardware : null;
+  const sys = model && model.system ? model.system : null;
+
+  for (const k of keys) {
+    const v = pickFirst(
+      req && req[k],
+      hw && hw[k],
+      sys && sys[k],
+      model && model[k]
+    );
+    if (isValidValue(v)) return v;
+  }
+  return null;
+}
+
+function safeText(v) {
+  return isValidValue(v) ? String(v) : "غير محدد";
+}
+
+function fillKeyValue(container, entries) {
+  while (container.firstChild) container.removeChild(container.firstChild);
+  Object.keys(entries).forEach((label) => {
+    const value = entries[label];
+    appendMeta(container, label, safeText(value));
+  });
+}
+
+/**
  * بناء تفاصيل النموذج داخل الأقسام الثلاثة
  */
 function renderModel(ctx, model) {
@@ -199,26 +244,39 @@ function renderModel(ctx, model) {
 
   // المتطلبات
   if (ctx.reqBodyEl) {
-    appendMeta(
-      ctx.reqBodyEl,
-      "Min VRAM",
-      model.minVramGb ? `${model.minVramGb}GB` : "-"
-    );
-    appendMeta(
-      ctx.reqBodyEl,
-      "Recommended VRAM",
-      model.recommendedVramGb ? `${model.recommendedVramGb}GB` : "-"
-    );
-    appendMeta(
-      ctx.reqBodyEl,
-      "Min RAM",
-      model.minRamGb ? `${model.minRamGb}GB` : "-"
-    );
-    appendMeta(
-      ctx.reqBodyEl,
-      "Recommended RAM",
-      model.recommendedRamGb ? `${model.recommendedRamGb}GB` : "-"
-    );
+    const reqBox = ctx.reqBodyEl;
+
+    const vram = getReqValue(model, [
+      "recommendedVramGb",
+      "minVramGb",
+      "vram",
+      "vramGb",
+      "gpuVram",
+      "vramGB",
+      "gpu_vram",
+    ]);
+
+    const ram = getReqValue(model, [
+      "recommendedRamGb",
+      "minRamGb",
+      "ram",
+      "ramGb",
+      "systemRam",
+      "memory",
+      "system_ram",
+    ]);
+
+    const cpu = getReqValue(model, ["cpu", "processor", "cpuModel"]);
+    const cooling = getReqValue(model, ["cooling", "cooler", "thermal"]);
+    const notes = getReqValue(model, ["notes", "comment", "extra", "reqNotes"]);
+
+    fillKeyValue(reqBox, {
+      "VRAM المقترحة": vram,
+      "RAM المقترحة": ram,
+      CPU: cpu,
+      تبريد: cooling,
+      "ملاحظات تشغيل": notes,
+    });
   }
 
   if (ctx.reqNoteEl) {
