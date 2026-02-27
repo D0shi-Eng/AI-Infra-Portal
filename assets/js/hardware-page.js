@@ -6,6 +6,12 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const table = document.getElementById("hwTable");
     if (!table) return;
+
+    function L(ar, en) {
+      try {
+        return (typeof I18N !== "undefined" && I18N.getSavedLang && I18N.getSavedLang() === "ar") ? ar : en;
+      } catch { return ar; }
+    }
   
     function th(text) {
       const el = document.createElement("th");
@@ -28,10 +34,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Header
     const thead = document.createElement("thead");
     thead.appendChild(tr([
-      th("GPU"),
-      th("VRAM"),
-      th("Recommended LLM"),
-      th("Notes"),
+      th(L("كرت الشاشة", "GPU")),
+      th(L("ذاكرة الفيديو", "VRAM")),
+      th(L("النموذج الموصى به", "Recommended LLM")),
+      th(L("ملاحظات", "Notes")),
     ]));
     table.appendChild(thead);
   
@@ -42,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       items = await HardwareData.loadHardware();
     } catch {
-      tbody.appendChild(tr([td("Failed to load hardware.json"), td(""), td(""), td("")]));
+      tbody.appendChild(tr([td(L("فشل تحميل hardware.json", "Failed to load hardware.json")), td(""), td(""), td("")]));
       return;
     }
   

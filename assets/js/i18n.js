@@ -260,7 +260,7 @@ const I18N = (() => {
   function setLang(lang) {
     if (!supported.includes(lang)) return;
     localStorage.setItem(STORAGE_KEY, lang);
-    apply();
+    location.reload();
   }
 
   function t(key) {
@@ -309,7 +309,3 @@ const I18N = (() => {
 
   return { init, t, getSavedLang, setLang, apply };
 })();
-// تشغيل تلقائي كشبكة أمان (حتى لو app.js ما اشتغل)
-document.addEventListener("DOMContentLoaded", () => {
-  if (I18N?.init) I18N.init();
-});
