@@ -1,15 +1,48 @@
+/* ═══════════════════════════════════════════════════════════════
+   theme.css — ألوان، متغيرات، تدرجات، تأثيرات الزجاج
+   ═══════════════════════════════════════════════════════════════ */
+
 :root {
   --bg-dark: #050510;
-  --bg-light: #f4f7fb;
+  --bg-light: #f0f2f8;
 
   --panel-dark: rgba(10, 14, 30, 0.55);
   --panel-light: rgba(255, 255, 255, 0.75);
 
+  --glass-dark: rgba(12, 16, 36, 0.65);
+  --glass-light: rgba(255, 255, 255, 0.55);
+  --glass-border-dark: rgba(0, 245, 255, 0.15);
+  --glass-border-light: rgba(157, 0, 255, 0.15);
+
   --neon: #00f5ff;
+  --neon-glow: rgba(0, 245, 255, 0.4);
   --purple: #9d00ff;
+  --purple-glow: rgba(157, 0, 255, 0.4);
+  --accent-green: #00ff88;
+  --accent-orange: #ff8800;
+  --accent-red: #ff3366;
+  --accent-gold: #ffd700;
 
   --text-dark: #ffffff;
   --text-light: #14151a;
+
+  --gradient-neon: linear-gradient(135deg, var(--neon), var(--purple));
+  --gradient-gold: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+  --gradient-card: linear-gradient(135deg, rgba(0, 245, 255, 0.06), rgba(157, 0, 255, 0.06));
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+
+  --shadow-neon: 0 0 20px rgba(0, 245, 255, 0.15), 0 0 60px rgba(0, 245, 255, 0.05);
+  --shadow-purple: 0 0 20px rgba(157, 0, 255, 0.15), 0 0 60px rgba(157, 0, 255, 0.05);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body {
@@ -18,32 +51,79 @@ body {
 }
 
 [data-theme="dark"] body {
-  background: radial-gradient(circle at 20% 10%, rgba(157,0,255,0.12), transparent 35%),
-              radial-gradient(circle at 80% 30%, rgba(0,245,255,0.10), transparent 35%),
-              var(--bg-dark);
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(157,0,255,0.08), transparent 50%),
+    radial-gradient(ellipse 60% 60% at 80% 30%, rgba(0,245,255,0.06), transparent 50%),
+    radial-gradient(ellipse 50% 50% at 50% 80%, rgba(0,245,255,0.04), transparent 50%),
+    var(--bg-dark);
   color: var(--text-dark);
 }
 
 [data-theme="light"] body {
-  background: radial-gradient(circle at 20% 10%, rgba(157,0,255,0.10), transparent 35%),
-              radial-gradient(circle at 80% 30%, rgba(0,245,255,0.10), transparent 35%),
-              var(--bg-light);
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(157,0,255,0.07), transparent 50%),
+    radial-gradient(ellipse 60% 60% at 80% 30%, rgba(0,245,255,0.07), transparent 50%),
+    var(--bg-light);
   color: var(--text-light);
 }
 
+/* CTA Buttons */
 .cta-btn {
-  display: inline-block;
-  padding: 12px 26px;
-  background: linear-gradient(45deg, var(--neon), var(--purple));
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 30px;
+  background: var(--gradient-neon);
+  border-radius: var(--radius-full);
   color: white;
   text-decoration: none;
-  font-weight: 900;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid rgba(255,255,255,0.12);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  border: 1px solid rgba(255,255,255,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.cta-btn:hover::before {
+  transform: translateX(100%);
 }
 
 .cta-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 0 26px rgba(0, 245, 255, 0.22);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 6px 30px rgba(0, 245, 255, 0.3), 0 0 60px rgba(157, 0, 255, 0.15);
+}
+
+/* Secondary / outline button */
+.cta-btn--outline {
+  background: transparent;
+  border: 2px solid var(--neon);
+  color: var(--neon);
+}
+
+.cta-btn--outline:hover {
+  background: rgba(0, 245, 255, 0.1);
+}
+
+[data-theme="light"] .cta-btn--outline {
+  border-color: var(--purple);
+  color: var(--purple);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

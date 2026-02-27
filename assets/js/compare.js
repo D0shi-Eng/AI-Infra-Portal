@@ -1,13 +1,7 @@
 /**
  * compare.js
- * مسؤول عن:
- * - تحميل قائمة كروت الشاشة من assets/data/hardware.json
- * - تعبئة القائمتين المنسدلتين GPU A و GPU B
- * - عرض مقارنة عملية (VRAM + توصية + ملاحظات)
- *
- * ملاحظات أمنية:
- * - لا نستخدم innerHTML إطلاقاً لتجنب XSS
- * - نبني DOM بعناصر آمنة (textContent)
+ * مقارنة GPU محسّنة مع أشرطة بصرية وتفاصيل أغنى
+ * ملاحظات أمنية: لا نستخدم innerHTML
  */
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -19,55 +13,105 @@ document.addEventListener("DOMContentLoaded", async () => {
   const bMeta = document.getElementById("bMeta");
   const verdict = document.getElementById("verdict");
 
-  // تأكد أن هذه الصفحة هي compare.html (وجود العناصر يعني أنها الصفحة الصحيحة)
   if (!gpuASelect || !gpuBSelect || !compareBtn || !aMeta || !bMeta || !verdict) return;
 
-  /**
-   * تفريغ عنصر DOM من أبنائه
-   */
   function clear(el) {
     while (el.firstChild) el.removeChild(el.firstChild);
   }
 
-  /**
-   * إضافة سطر معلومات بشكل آمن
-   */
-  function addLine(container, label, value) {
-    const line = document.createElement("span");
-    line.textContent = `• ${label}: ${value}`;
-    container.appendChild(line);
-  }
-
-  /**
-   * نصوص حسب اللغة الحالية (عربي/إنجليزي)
-   */
   function L(ar, en) {
     try {
       return (typeof I18N !== "undefined" && I18N.getSavedLang && I18N.getSavedLang() === "ar") ? ar : en;
     } catch {
-      return ar; // افتراضي عربي
+      return ar;
     }
   }
 
-  /**
-   * تحويل VRAM إلى رقم آمن
-   */
   function toNumber(n) {
     const x = Number(n);
     return Number.isFinite(x) ? x : 0;
   }
 
-  // تحميل بيانات GPU
+  /**
+   * بناء بطاقة GPU محسّنة مع spec list
+   */
+  function buildGpuCard(container, gpu, label) {
+    clear(container);
+
+    // GPU Name header
+    const nameEl = document.createElement("div");
+    nameEl.style.cssText = "font-size:1.2rem; font-weight:800; margin-bottom:12px;";
+    nameEl.textContent = gpu.name || label;
+    container.appendChild(nameEl);
+
+    // Spec list
+    const list = document.createElement("ul");
+    list.className = "spec-list";
+
+    const specs = [
+      { key: "VRAM", val: gpu.vramGb ? gpu.vramGb + " GB" : "-" },
+      { key: L("الأنسب لـ", "Best For"), val: gpu.recommended || "-" },
+      { key: L("ملاحظات", "Notes"), val: gpu.notes || "-" },
+    ];
+
+    specs.forEach((s) => {
+      const li = document.createElement("li");
+      const k = document.createElement("span");
+      k.className = "spec-key";
+      k.textContent = s.key;
+      const v = document.createElement("span");
+      v.className = "spec-val";
+      v.textContent = s.val;
+      li.appendChild(k);
+      li.appendChild(v);
+      list.appendChild(li);
+    });
+
+    container.appendChild(list);
+
+    // VRAM bar
+    if (gpu.vramGb) {
+      const barWrap = document.createElement("div");
+      barWrap.className = "compare-bar-wrapper";
+      barWrap.style.marginTop = "16px";
+
+      const barLabel = document.createElement("div");
+      barLabel.className = "compare-bar-label";
+      const labelText = document.createElement("span");
+      labelText.textContent = "VRAM";
+      const labelVal = document.createElement("span");
+      labelVal.textContent = gpu.vramGb + " GB";
+      barLabel.appendChild(labelText);
+      barLabel.appendChild(labelVal);
+
+      const bar = document.createElement("div");
+      bar.className = "compare-bar";
+
+      const fill = document.createElement("div");
+      fill.className = label === "GPU A" ? "compare-bar-fill compare-bar-fill--a" : "compare-bar-fill compare-bar-fill--b";
+      fill.style.width = "0%";
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          fill.style.width = Math.min(100, (gpu.vramGb / 80) * 100) + "%";
+        });
+      });
+
+      bar.appendChild(fill);
+      barWrap.appendChild(barLabel);
+      barWrap.appendChild(bar);
+      container.appendChild(barWrap);
+    }
+  }
+
   let gpus = [];
   try {
     if (typeof HardwareData === "undefined" || !HardwareData.loadHardware) {
-      verdict.textContent = "HardwareData is missing. Ensure hardware-data.js is loaded before compare.js";
+      verdict.textContent = "HardwareData is missing.";
       return;
     }
-
     gpus = await HardwareData.loadHardware();
   } catch (err) {
-    verdict.textContent = L("فشل تحميل بيانات كروت الشاشة (hardware.json).", "Failed to load GPU data (hardware.json).");
+    verdict.textContent = L("فشل تحميل بيانات كروت الشاشة.", "Failed to load GPU data.");
     return;
   }
 
@@ -76,101 +120,71 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  /**
-   * تعبئة select بقائمة GPUs
-   */
   function fillSelect(select) {
     clear(select);
-
     gpus.forEach((gpu, idx) => {
       const opt = document.createElement("option");
       opt.value = String(idx);
-
-      const name = gpu?.name ? String(gpu.name) : `GPU ${idx + 1}`;
-      const vram = gpu?.vramGb != null ? `${gpu.vramGb}GB` : "?GB";
-
-      opt.textContent = `${name} (${vram})`;
+      const name = gpu?.name ? String(gpu.name) : "GPU " + (idx + 1);
+      const vram = gpu?.vramGb != null ? gpu.vramGb + "GB" : "?GB";
+      opt.textContent = name + " (" + vram + ")";
       select.appendChild(opt);
     });
   }
 
   fillSelect(gpuASelect);
   fillSelect(gpuBSelect);
-
-  // اختيار افتراضي: A=الأول، B=الثاني (إن وجد)
   gpuASelect.value = "0";
   gpuBSelect.value = String(Math.min(1, gpus.length - 1));
 
-  /**
-   * بناء مقارنة فعلية
-   */
   function computeComparison() {
     const aIdx = Number(gpuASelect.value);
     const bIdx = Number(gpuBSelect.value);
-
     const A = gpus[aIdx];
     const B = gpus[bIdx];
-
     if (!A || !B) return;
 
-    // عرض تفاصيل A و B
-    clear(aMeta);
-    clear(bMeta);
+    buildGpuCard(aMeta, A, "GPU A");
+    buildGpuCard(bMeta, B, "GPU B");
 
-    addLine(aMeta, L("الاسم", "Name"), A.name || "-");
-    addLine(aMeta, L("VRAM", "VRAM"), A.vramGb != null ? `${A.vramGb}GB` : "-");
-    addLine(aMeta, L("الأنسب لـ", "Best For"), A.recommended || "-");
-    addLine(aMeta, L("ملاحظات", "Notes"), A.notes || "-");
-
-    addLine(bMeta, L("الاسم", "Name"), B.name || "-");
-    addLine(bMeta, L("VRAM", "VRAM"), B.vramGb != null ? `${B.vramGb}GB` : "-");
-    addLine(bMeta, L("الأنسب لـ", "Best For"), B.recommended || "-");
-    addLine(bMeta, L("ملاحظات", "Notes"), B.notes || "-");
-
-    // حكم المقارنة
     const aV = toNumber(A.vramGb);
     const bV = toNumber(B.vramGb);
 
     if (aV === 0 && bV === 0) {
       verdict.textContent = L(
-        "لا توجد معلومات VRAM كافية للحكم. حدّث hardware.json وأعد المحاولة.",
-        "Not enough VRAM data to judge. Update hardware.json and try again."
+        "لا توجد معلومات VRAM كافية للحكم.",
+        "Not enough VRAM data to judge."
       );
       return;
     }
 
     if (aV === bV) {
       verdict.textContent = L(
-        "كلاهما متقارب في VRAM. اختر حسب السعر، التوفر، استهلاك الطاقة، والتبريد.",
-        "Both are similar in VRAM. Choose based on price, availability, power, and thermals."
+        "كلاهما متقارب في VRAM. اختر حسب السعر والتوفر والتبريد.",
+        "Both are similar in VRAM. Choose based on price, availability, and thermals."
       );
       return;
     }
 
     const winner = aV > bV ? "A" : "B";
+    const winnerName = aV > bV ? A.name : B.name;
     const diff = Math.abs(aV - bV);
 
-    // توصية عامة مرتبطة بالحجم
     const hint =
       diff >= 24
         ? L("فرق كبير — مناسب للنماذج الضخمة والسياق الطويل.", "Big gap — better for large models and long context.")
         : diff >= 8
         ? L("فرق واضح — أفضل لتجربة نماذج أكبر بأريحية.", "Clear gap — better for running larger models comfortably.")
-        : L("فرق بسيط — قد يكون السعر والتبريد أهم من فرق VRAM هنا.", "Small gap — price and thermals may matter more here.");
+        : L("فرق بسيط — قد يكون السعر والتبريد أهم.", "Small gap — price and thermals may matter more.");
 
     verdict.textContent = L(
-      `GPU ${winner} يتفوق بـ +${diff}GB VRAM. ${hint}`,
-      `GPU ${winner} wins by +${diff}GB VRAM. ${hint}`
+      "🏆 " + winnerName + " (GPU " + winner + ") يتفوق بـ +" + diff + "GB VRAM. " + hint,
+      "🏆 " + winnerName + " (GPU " + winner + ") wins by +" + diff + "GB VRAM. " + hint
     );
   }
 
-  // أحداث
   compareBtn.addEventListener("click", computeComparison);
-
-  // تحديث مباشر عند تغيير الاختيار
   gpuASelect.addEventListener("change", computeComparison);
   gpuBSelect.addEventListener("change", computeComparison);
-
-  // أول تشغيل
   computeComparison();
 });

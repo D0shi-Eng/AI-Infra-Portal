@@ -102,6 +102,38 @@ const I18N = (() => {
       badge_video: "فيديو",
       badge_multimodal: "متعدد",
 
+      // stats
+      stat_models: "نماذج ذكاء اصطناعي",
+      stat_gpus: "كرت شاشة",
+      stat_quant: "مستويات كوانتايز",
+      stat_langs: "لغة مدعومة",
+
+      // features
+      features_title: "ماذا نقدّم لك؟",
+      features_subtitle: "أدوات عملية تختصر وقتك وتساعدك تختار صح",
+      feat_models_title: "دليل النماذج",
+      feat_models_desc: "استعرض النماذج مع متطلبات التشغيل والفلاتر الذكية",
+      feat_calc_title: "حاسبة المتطلبات",
+      feat_calc_desc: "قدّر VRAM و RAM بناءً على حجم النموذج والكوانتايز",
+      feat_compare_title: "مقارنة GPU",
+      feat_compare_desc: "قارن كروت الشاشة واعرف الأنسب لتشغيل النماذج محلياً",
+      feat_hw_title: "إرشادات التجميع",
+      feat_hw_desc: "توصيات عملية لبناء جهاز حسب حجم النموذج",
+      feat_theme_title: "وضع ليلي/نهاري",
+      feat_theme_desc: "تصميم احترافي يتكيّف مع تفضيلاتك البصرية",
+      feat_future_title: "قابل للتوسع",
+      feat_future_desc: "بنية جاهزة لمتجر تجهيزات AI ولوحة إدارة مستقبلية",
+
+      // footer
+      footer_desc: "منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء الاصطناعي وربطها بالبنية التحتية المناسبة.",
+      footer_nav: "التنقّل",
+      footer_tools: "الأدوات",
+      footer_soon: "قريباً",
+      footer_store: "متجر التجهيزات",
+      footer_api: "API مطورين",
+      footer_community: "المجتمع",
+      footer_rights: "جميع الحقوق محفوظة.",
+
       empty: "لا توجد نتائج مطابقة.",
       loading: "جارٍ التحميل…",
     },
@@ -194,6 +226,38 @@ const I18N = (() => {
       badge_image: "Image",
       badge_video: "Video",
       badge_multimodal: "Multi",
+
+      // stats
+      stat_models: "AI Models",
+      stat_gpus: "GPUs Listed",
+      stat_quant: "Quantization Levels",
+      stat_langs: "Languages Supported",
+
+      // features
+      features_title: "What We Offer",
+      features_subtitle: "Practical tools to save time and make confident decisions",
+      feat_models_title: "Models Directory",
+      feat_models_desc: "Browse models with runtime requirements and smart filters",
+      feat_calc_title: "Requirements Calculator",
+      feat_calc_desc: "Estimate VRAM & RAM based on model size and quantization",
+      feat_compare_title: "GPU Comparison",
+      feat_compare_desc: "Compare GPUs and find the best fit for local inference",
+      feat_hw_title: "Build Guidance",
+      feat_hw_desc: "Practical hardware recommendations by model tier",
+      feat_theme_title: "Dark/Light Mode",
+      feat_theme_desc: "Professional design that adapts to your visual preference",
+      feat_future_title: "Expandable",
+      feat_future_desc: "Ready for an AI hardware store and admin dashboard",
+
+      // footer
+      footer_desc: "A specialized technical platform for understanding AI model requirements and matching them with the right infrastructure.",
+      footer_nav: "Navigation",
+      footer_tools: "Tools",
+      footer_soon: "Coming Soon",
+      footer_store: "Hardware Store",
+      footer_api: "Developer API",
+      footer_community: "Community",
+      footer_rights: "All rights reserved.",
 
       empty: "No matching results.",
       loading: "Loading…",
