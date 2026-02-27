@@ -1,0 +1,19 @@
+/* إعدادات أساسية للنظام بالكامل */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  body {
+    background: #000;
+    color: #fff;
+    overflow-x: hidden;
+  }
+  
+  button {
+    cursor: pointer;
+    border: none;
+    background: none;
+  }

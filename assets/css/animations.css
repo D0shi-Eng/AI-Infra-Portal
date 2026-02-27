@@ -1,0 +1,12 @@
+.hero-content h1 {
+    animation: glow 2s infinite alternate;
+  }
+  
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 10px #00f5ff;
+    }
+    to {
+      text-shadow: 0 0 25px #9d00ff;
+    }
+  }

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Model • AI INFRA</title>
+
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+
+<body>
+<header class="navbar">
+  <div class="nav-left">
+    <div class="logo" data-i18n="brand">AI INFRA</div>
+    <nav class="nav-links">
+      <a href="index.html" data-i18n="nav_home"></a>
+      <a href="models.html" data-i18n="nav_models"></a>
+      <a href="hardware.html" data-i18n="nav_hardware"></a>
+      <a href="compare.html" data-i18n="nav_compare"></a>
+      <a href="calculator.html" data-i18n="nav_calc"></a>
+      <a href="about.html" data-i18n="nav_about"></a>
+    </nav>
+  </div>
+  <div class="controls">
+    <button id="langToggle">EN</button>
+    <button id="themeToggle">☀</button>
+  </div>
+</header>
+
+<main class="container">
+  <a class="btn" href="models.html" data-i18n="back_to_models">عودة إلى الدليل</a>
+
+  <div class="hr"></div>
+
+  <h1 class="page-title" data-i18n="model_title">تفاصيل النموذج</h1>
+  <p class="page-subtitle" id="modelName"></p>
+
+  <section class="grid" style="grid-template-columns: 1fr 1fr;">
+    <article class="neon-card">
+      <div class="card-title" data-i18n="model_specs">المواصفات</div>
+      <div class="card-meta" id="specs"></div>
+      <div class="badges" id="badges"></div>
+    </article>
+
+    <article class="neon-card">
+      <div class="card-title" data-i18n="model_requirements">المتطلبات</div>
+      <div class="card-meta" id="reqs"></div>
+      <div class="muted" id="reqNote" style="margin-top:10px;"></div>
+    </article>
+  </section>
+
+  <div class="hr"></div>
+
+  <article class="neon-card">
+    <div class="card-title" data-i18n="model_notes">ملاحظات</div>
+    <p class="muted" id="notes" style="margin-top:10px; line-height:1.8;"></p>
+  </article>
+</main>
+
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/app.js"></script>
+
+<script src="assets/js/models-data.js"></script>
+<script src="assets/js/router.js"></script>
+<script src="assets/js/model-page.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculator • AI INFRA</title>
+
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+
+<body>
+<header class="navbar">
+  <div class="nav-left">
+    <div class="logo" data-i18n="brand">AI INFRA</div>
+    <nav class="nav-links">
+      <a href="index.html" data-i18n="nav_home"></a>
+      <a href="models.html" data-i18n="nav_models"></a>
+      <a href="hardware.html" data-i18n="nav_hardware"></a>
+      <a href="compare.html" data-i18n="nav_compare"></a>
+      <a href="calculator.html" data-i18n="nav_calc"></a>
+      <a href="about.html" data-i18n="nav_about"></a>
+    </nav>
+  </div>
+  <div class="controls">
+    <button id="langToggle">EN</button>
+    <button id="themeToggle">☀</button>
+  </div>
+</header>
+
+<main class="container">
+  <h1 class="page-title" data-i18n="calc_title"></h1>
+  <p class="page-subtitle" data-i18n="calc_subtitle"></p>
+
+  <article class="neon-card">
+    <div class="toolbar">
+      <div class="search-row">
+        <label class="muted" data-i18n="calc_params_label" for="paramsB"></label>
+        <input id="paramsB" class="input" type="number" min="0.1" step="0.1" value="7" />
+      </div>
+
+      <div class="search-row">
+        <label class="muted" data-i18n="calc_quant_label" for="quant"></label>
+        <select id="quant" class="select">
+          <option value="fp16">FP16 (16-bit)</option>
+          <option value="int8">INT8 (8-bit)</option>
+          <option value="q6">Q6</option>
+          <option value="q5">Q5</option>
+          <option value="q4" selected>Q4</option>
+        </select>
+      </div>
+
+      <div class="search-row">
+        <label class="muted" data-i18n="calc_context_label" for="contextK"></label>
+        <input id="contextK" class="input" type="number" min="0" step="1" value="8" />
+      </div>
+
+      <div class="actions-row">
+        <button id="calcBtn" class="btn" data-i18n="calc_btn"></button>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="card-title" data-i18n="calc_result"></div>
+    <p class="muted" id="calcOut" style="margin-top:10px; line-height:1.9;"></p>
+  </article>
+</main>
+
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/app.js"></script>
+
+<script src="assets/js/calculator.js"></script>
+</body>
+</html>

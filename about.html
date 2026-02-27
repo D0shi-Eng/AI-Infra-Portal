@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About • AI INFRA</title>
+
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+
+<body>
+<header class="navbar">
+  <div class="nav-left">
+    <div class="logo" data-i18n="brand">AI INFRA</div>
+    <nav class="nav-links">
+      <a href="index.html" data-i18n="nav_home"></a>
+      <a href="models.html" data-i18n="nav_models"></a>
+      <a href="hardware.html" data-i18n="nav_hardware"></a>
+      <a href="compare.html" data-i18n="nav_compare"></a>
+      <a href="calculator.html" data-i18n="nav_calc"></a>
+      <a href="about.html" data-i18n="nav_about"></a>
+    </nav>
+  </div>
+  <div class="controls">
+    <button id="langToggle">EN</button>
+    <button id="themeToggle">☀</button>
+  </div>
+</header>
+
+<main class="container">
+  <h1 class="page-title" data-i18n="about_title"></h1>
+  <p class="page-subtitle" data-i18n="about_subtitle"></p>
+
+  <section class="grid" style="grid-template-columns: 1fr 1fr;">
+    <article class="neon-card">
+      <div class="card-title" data-i18n="about_security"></div>
+      <p class="muted" style="margin-top:10px; line-height:1.8;" data-i18n="about_security_points"></p>
+    </article>
+
+    <article class="neon-card">
+      <div class="card-title">Roadmap</div>
+      <p class="muted" style="margin-top:10px; line-height:1.8;">
+        • Phase 1: Portal + Models + Calculator (GitHub Pages)<br>
+        • Phase 2: Admin Dashboard + Data Pipeline<br>
+        • Phase 3: Backend + Auth + Inventory (عند توفر مخزون)<br>
+        • Phase 4: Payments + Shipping + Store Launch
+      </p>
+    </article>
+  </section>
+
+  <div class="hr"></div>
+
+  <article class="neon-card">
+    <div class="card-title">Future Store</div>
+    <p class="muted" style="margin-top:10px; line-height:1.8;">
+      المتجر الحقيقي يتطلب Backend + قاعدة بيانات + بوابة دفع.  
+      هذا الموقع الآن مبني بطريقة تسمح بإضافة ذلك لاحقاً بدون إعادة كتابة الواجهة.
+    </p>
+  </article>
+</main>
+
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

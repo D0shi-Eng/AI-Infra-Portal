@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI INFRA</title>
+
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+
+  <!-- Three.js (يمكن لاحقاً تنزيله محلياً لزيادة الأمان) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+</head>
+
+<body>
+<header class="navbar">
+  <div class="nav-left">
+    <div class="logo" data-i18n="brand">AI INFRA</div>
+    <nav class="nav-links">
+      <a href="index.html" data-i18n="nav_home"></a>
+      <a href="models.html" data-i18n="nav_models"></a>
+      <a href="hardware.html" data-i18n="nav_hardware"></a>
+      <a href="compare.html" data-i18n="nav_compare"></a>
+      <a href="calculator.html" data-i18n="nav_calc"></a>
+      <a href="about.html" data-i18n="nav_about"></a>
+    </nav>
+  </div>
+
+  <div class="controls">
+    <button id="langToggle">EN</button>
+    <button id="themeToggle">☀</button>
+  </div>
+</header>
+
+<section class="hero">
+  <canvas id="bg3d"></canvas>
+
+  <div class="hero-content">
+    <h1 data-i18n="title"></h1>
+    <p data-i18n="subtitle"></p>
+
+    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:18px;">
+      <a href="models.html" class="cta-btn" data-i18n="quick_models"></a>
+      <a href="calculator.html" class="cta-btn" data-i18n="quick_calc"></a>
+      <a href="compare.html" class="cta-btn" data-i18n="quick_compare"></a>
+    </div>
+  </div>
+</section>
+
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/three-init.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

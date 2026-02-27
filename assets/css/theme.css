@@ -1,0 +1,49 @@
+:root {
+  --bg-dark: #050510;
+  --bg-light: #f4f7fb;
+
+  --panel-dark: rgba(10, 14, 30, 0.55);
+  --panel-light: rgba(255, 255, 255, 0.75);
+
+  --neon: #00f5ff;
+  --purple: #9d00ff;
+
+  --text-dark: #ffffff;
+  --text-light: #14151a;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+[data-theme="dark"] body {
+  background: radial-gradient(circle at 20% 10%, rgba(157,0,255,0.12), transparent 35%),
+              radial-gradient(circle at 80% 30%, rgba(0,245,255,0.10), transparent 35%),
+              var(--bg-dark);
+  color: var(--text-dark);
+}
+
+[data-theme="light"] body {
+  background: radial-gradient(circle at 20% 10%, rgba(157,0,255,0.10), transparent 35%),
+              radial-gradient(circle at 80% 30%, rgba(0,245,255,0.10), transparent 35%),
+              var(--bg-light);
+  color: var(--text-light);
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 12px 26px;
+  background: linear-gradient(45deg, var(--neon), var(--purple));
+  border-radius: 999px;
+  color: white;
+  text-decoration: none;
+  font-weight: 900;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 26px rgba(0, 245, 255, 0.22);
+}
