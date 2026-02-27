@@ -84,8 +84,7 @@ AI INFRA هي منصة تقنية متخصصة تهدف إلى تبسيط فهم
 المرحلة 1: منصة استكشاف وتحليل  
 المرحلة 2: توسيع قاعدة بيانات النماذج  
 المرحلة 3: لوحة إدارة وربط بيانات ديناميكي  
-المرحلة 4: إضافة متجر عتاد ذكاء اصطناعي  
-المرحلة 5: منصة تجارة متكاملة للبنية التحتية
+
 
 ---
 
@@ -169,8 +168,7 @@ No sensitive credentials stored.
 Phase 1 — Infrastructure Intelligence Portal  
 Phase 2 — Expanded Model Database  
 Phase 3 — Admin & Automation Layer  
-Phase 4 — AI Hardware Commerce Integration  
-Phase 5 — Full AI Infrastructure Marketplace
+
 
 ---
 
