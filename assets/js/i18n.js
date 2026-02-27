@@ -215,3 +215,7 @@ const I18N = (() => {
 
   return { init, t, getSavedLang, setLang, apply };
 })();
+// تشغيل تلقائي كشبكة أمان (حتى لو app.js ما اشتغل)
+document.addEventListener("DOMContentLoaded", () => {
+  if (I18N?.init) I18N.init();
+});
