@@ -78,10 +78,8 @@ function initAccordion(ctx) {
       }
     });
 
-    // فتح أول عنصر بشكل افتراضي لتجنب صفحة فارغة
-    if (index === 0) {
-      item.classList.add("open");
-    }
+    // فتح كل الأقسام افتراضياً حتى تظهر المتطلبات والملاحظات دون الحاجة للنقر
+    item.classList.add("open");
   });
 }
 
