@@ -46,6 +46,14 @@ const I18N = (() => {
       model_requirements: "المتطلبات",
       model_notes: "ملاحظات",
       back_to_models: "عودة إلى الدليل",
+      model_missing_id_title: "لا يوجد معرّف نموذج",
+      model_missing_id_message:
+        "لفتح هذه الصفحة، انتقل إلى دليل النماذج ثم اختر نموذجاً، أو أضف ‎?id=<معرّف_النموذج> إلى الرابط.",
+      model_not_found_title: "النموذج غير موجود",
+      model_not_found_message:
+        "لم يتم العثور على نموذج بهذا المعرّف. تأكد أنك تستخدم رابطاً صحيحاً من دليل النماذج.",
+      model_load_error:
+        "تعذّر تحميل بيانات النماذج حالياً. حاول لاحقاً أو تأكد من اتصالك بالإنترنت.",
 
       // hardware
       hardware_title: "متطلبات تشغيل النماذج",
@@ -67,10 +75,10 @@ const I18N = (() => {
 
       // about
       about_title: "عن المنصة",
-      about_subtitle: "بوابة تقنية لتبسيط اختيار النموذج والهاردوير — قابلة للتوسع إلى متجر مستقبلاً",
+      about_subtitle: "بوابة تقنية لتبسيط اختيار النموذج والهاردوير ً",
       about_security: "الأمان",
       about_security_points:
-        "لا نستخدم innerHTML • لا سكربتات طرف ثالث غير ضرورية • قابل لإضافة CSP • تصميم قابل للترقية إلى Backend لاحقاً",
+        "لا نستخدم innerHTML ",
 
       // common
       badge_open: "مفتوح",
@@ -120,6 +128,14 @@ const I18N = (() => {
       model_requirements: "Requirements",
       model_notes: "Notes",
       back_to_models: "Back to Directory",
+      model_missing_id_title: "Missing model identifier",
+      model_missing_id_message:
+        "To open this page, use the models directory and pick a model, or append ‎?id=<MODEL_ID> to the URL.",
+      model_not_found_title: "Model not found",
+      model_not_found_message:
+        "No model was found with this identifier. Make sure you used a valid link from the models directory.",
+      model_load_error:
+        "Failed to load model data. Please try again later or check your connection.",
 
       // hardware
       hardware_title: "Model Hardware Requirements",

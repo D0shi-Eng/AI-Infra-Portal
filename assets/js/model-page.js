@@ -1,82 +1,259 @@
 /**
  * model-page.js
  * صفحة تفاصيل النموذج:
- * - قراءة id من query
- * - جلب models.json
- * - إيجاد النموذج وعرض تفاصيله
- * ملاحظة أمنية:
- * - بناء DOM بطريقة آمنة بدون innerHTML
+ * - قراءة id من الـ query string
+ * - تحميل models.json عبر طبقة ModelsData
+ * - عرض تفاصيل النموذج داخل أقسام (مواصفات/متطلبات/ملاحظات)
+ * - تفعيل Accordion لكل قسم
+ *
+ * ملاحظات أمنية:
+ * - لا نستخدم innerHTML إطلاقاً (تفادي XSS)
+ * - كل العقد تُبنى بـ createElement/textContent فقط
+ * - أي رسالة للمستخدم تمر عبر طبقة i18n
  */
 
-document.addEventListener("DOMContentLoaded", async () => {
-    const id = Router.getQueryParam("id");
-    const nameEl = document.getElementById("modelName");
-    const specsEl = document.getElementById("specs");
-    const badgesEl = document.getElementById("badges");
-    const reqsEl = document.getElementById("reqs");
-    const reqNoteEl = document.getElementById("reqNote");
-    const notesEl = document.getElementById("notes");
-  
-    function addMeta(container, label, value) {
-      const span = document.createElement("span");
-      span.textContent = `• ${label}: ${value}`;
-      container.appendChild(span);
+document.addEventListener("DOMContentLoaded", () => {
+  const ctx = initElements();
+  initAccordion(ctx);
+  hydrateModelDetails(ctx);
+});
+
+/**
+ * تهيئة واختيار العناصر الثابتة في الصفحة مرة واحدة
+ */
+function initElements() {
+  const titleEl = document.getElementById("modelTitle");
+  const nameEl = document.getElementById("modelName");
+  const statusEl = document.getElementById("pageStatus");
+  const specBodyEl = document.getElementById("specBody");
+  const reqBodyEl = document.getElementById("reqBody");
+  const notesBodyEl = document.getElementById("notesBody");
+  const badgesEl = document.getElementById("badges");
+  const reqNoteEl = document.getElementById("reqNote");
+
+  const accordionItems = Array.from(
+    document.querySelectorAll(".accordion-item")
+  );
+
+  return {
+    titleEl,
+    nameEl,
+    statusEl,
+    specBodyEl,
+    reqBodyEl,
+    notesBodyEl,
+    badgesEl,
+    reqNoteEl,
+    accordionItems,
+  };
+}
+
+/**
+ * تفعيل الـ Accordion بحيث:
+ * - النقر على العنوان يفتح/يغلق القسم
+ * - دعم لوحة المفاتيح (Enter/Space)
+ * - يعمل حتى لو فشل تحميل البيانات
+ */
+function initAccordion(ctx) {
+  ctx.accordionItems.forEach((item, index) => {
+    const head = item.querySelector(".accordion-head");
+    const body = item.querySelector(".accordion-body");
+    if (!head || !body) return;
+
+    // نجعل العنوان قابلاً للتركيز والاستخدام بالكيبورد
+    head.setAttribute("tabindex", "0");
+    head.setAttribute("role", "button");
+
+    const toggle = () => {
+      const isOpen = item.classList.contains("open");
+      ctx.accordionItems.forEach((other) => other.classList.remove("open"));
+      if (!isOpen) item.classList.add("open");
+    };
+
+    head.addEventListener("click", toggle);
+    head.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggle();
+      }
+    });
+
+    // فتح أول عنصر بشكل افتراضي لتجنب صفحة فارغة
+    if (index === 0) {
+      item.classList.add("open");
     }
-  
-    function addBadge(text) {
-      const b = document.createElement("span");
-      b.className = "badge";
-      b.textContent = text;
-      badgesEl.appendChild(b);
-    }
-  
-    if (!id) {
-      nameEl.textContent = "Missing model id";
-      return;
-    }
-  
-    let models = [];
-    try {
-      models = await ModelsData.loadModels();
-    } catch {
-      nameEl.textContent = "Failed to load models.json";
-      return;
-    }
-  
-    const model = models.find((m) => String(m.id) === String(id));
-    if (!model) {
-      nameEl.textContent = "Model not found";
-      return;
-    }
-  
-    nameEl.textContent = model.name;
-  
-    // Specs
-    addMeta(specsEl, "Provider", model.provider || "-");
-    addMeta(specsEl, "Type", model.type || "-");
-    addMeta(specsEl, "Family", model.family || "-");
-    addMeta(specsEl, "Params", model.paramsB ? `${model.paramsB}B` : "-");
-    addMeta(specsEl, "Context", model.contextK ? `${model.contextK}K` : "-");
-    addMeta(specsEl, "License", model.license || "-");
-  
-    // Badges
-    addBadge(model.open ? I18N.t("badge_open") : I18N.t("badge_closed"));
-    if (model.moe) addBadge(I18N.t("badge_moe"));
-    (Array.isArray(model.modalities) ? model.modalities : []).forEach(addBadge);
-    (Array.isArray(model.languages) ? model.languages : []).slice(0, 3).forEach((l) => addBadge(l));
-  
-    // Requirements
-    addMeta(reqsEl, "Min VRAM", model.minVramGb ? `${model.minVramGb}GB` : "-");
-    addMeta(reqsEl, "Recommended VRAM", model.recommendedVramGb ? `${model.recommendedVramGb}GB` : "-");
-    addMeta(reqsEl, "Min RAM", model.minRamGb ? `${model.minRamGb}GB` : "-");
-    addMeta(reqsEl, "Recommended RAM", model.recommendedRamGb ? `${model.recommendedRamGb}GB` : "-");
-  
-    reqNoteEl.textContent =
+  });
+}
+
+/**
+ * قراءة id من الـ URL ثم تحميل البيانات وعرضها
+ */
+async function hydrateModelDetails(ctx) {
+  const rawId = getModelIdFromUrl();
+  if (!rawId) {
+    showStatus(ctx, "model_missing_id_title", "model_missing_id_message");
+    return;
+  }
+
+  let models = [];
+  try {
+    models = await ModelsData.loadModels();
+  } catch {
+    showStatus(ctx, "model_title", "model_load_error");
+    return;
+  }
+
+  const idLower = String(rawId).toLowerCase().trim();
+  const model =
+    models.find(
+      (m) => String(m.id || "").toLowerCase().trim() === idLower
+    ) || null;
+
+  if (!model) {
+    showStatus(ctx, "model_not_found_title", "model_not_found_message");
+    return;
+  }
+
+  renderModel(ctx, model);
+}
+
+/**
+ * استخراج modelId من الـ query string بطريقة آمنة
+ */
+function getModelIdFromUrl() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    if (!id) return null;
+    const trimmed = id.trim();
+    return trimmed.length ? trimmed : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * عرض رسالة حالة للمستخدم (مترجمة)
+ */
+function showStatus(ctx, titleKey, messageKey) {
+  if (ctx.nameEl) ctx.nameEl.textContent = "";
+  if (ctx.titleEl && titleKey) {
+    ctx.titleEl.textContent = I18N.t(titleKey);
+  }
+  if (ctx.statusEl && messageKey) {
+    ctx.statusEl.textContent = I18N.t(messageKey);
+  }
+
+  // تفريغ الحقول حتى لا تبقى بيانات قديمة
+  [ctx.specBodyEl, ctx.reqBodyEl, ctx.notesBodyEl].forEach((el) => {
+    if (!el) return;
+    while (el.firstChild) el.removeChild(el.firstChild);
+  });
+  if (ctx.badgesEl) {
+    while (ctx.badgesEl.firstChild) ctx.badgesEl.removeChild(ctx.badgesEl.firstChild);
+  }
+  if (ctx.reqNoteEl) {
+    ctx.reqNoteEl.textContent = "";
+  }
+}
+
+/**
+ * بناء تفاصيل النموذج داخل الأقسام الثلاثة
+ */
+function renderModel(ctx, model) {
+  if (ctx.statusEl) ctx.statusEl.textContent = "";
+  if (ctx.nameEl) ctx.nameEl.textContent = model.name || "";
+
+  // مواصفات
+  if (ctx.specBodyEl) {
+    appendMeta(ctx.specBodyEl, "Provider", model.provider || "-");
+    appendMeta(ctx.specBodyEl, "Type", model.type || "-");
+    appendMeta(ctx.specBodyEl, "Family", model.family || "-");
+    appendMeta(
+      ctx.specBodyEl,
+      "Params",
+      model.paramsB ? `${model.paramsB}B` : "-"
+    );
+    appendMeta(
+      ctx.specBodyEl,
+      "Context",
+      model.contextK ? `${model.contextK}K` : "-"
+    );
+    appendMeta(ctx.specBodyEl, "License", model.license || "-");
+  }
+
+  // شارات
+  if (ctx.badgesEl) {
+    appendBadge(
+      ctx.badgesEl,
+      model.open ? I18N.t("badge_open") : I18N.t("badge_closed")
+    );
+    if (model.moe) appendBadge(ctx.badgesEl, I18N.t("badge_moe"));
+    (Array.isArray(model.modalities) ? model.modalities : []).forEach((m) =>
+      appendBadge(ctx.badgesEl, String(m))
+    );
+    (Array.isArray(model.languages) ? model.languages : [])
+      .slice(0, 3)
+      .forEach((l) => appendBadge(ctx.badgesEl, String(l)));
+  }
+
+  // المتطلبات
+  if (ctx.reqBodyEl) {
+    appendMeta(
+      ctx.reqBodyEl,
+      "Min VRAM",
+      model.minVramGb ? `${model.minVramGb}GB` : "-"
+    );
+    appendMeta(
+      ctx.reqBodyEl,
+      "Recommended VRAM",
+      model.recommendedVramGb ? `${model.recommendedVramGb}GB` : "-"
+    );
+    appendMeta(
+      ctx.reqBodyEl,
+      "Min RAM",
+      model.minRamGb ? `${model.minRamGb}GB` : "-"
+    );
+    appendMeta(
+      ctx.reqBodyEl,
+      "Recommended RAM",
+      model.recommendedRamGb ? `${model.recommendedRamGb}GB` : "-"
+    );
+  }
+
+  if (ctx.reqNoteEl) {
+    ctx.reqNoteEl.textContent =
       model.requirementsNote ||
       (I18N.getSavedLang() === "ar"
         ? "هذه تقديرات عملية وقد تختلف حسب الكوانتايز، طول السياق، والباك-إند."
         : "Practical estimates; varies by quantization, context length, and backend.");
-  
-    // Notes
-    notesEl.textContent = model.notes || (I18N.getSavedLang() === "ar" ? "لا توجد ملاحظات." : "No notes.");
-  });
+  }
+
+  // الملاحظات
+  if (ctx.notesBodyEl) {
+    ctx.notesBodyEl.textContent =
+      model.notes ||
+      (I18N.getSavedLang() === "ar"
+        ? "لا توجد ملاحظات."
+        : "No notes.");
+  }
+}
+
+/**
+ * إضافة سطر ميتا بشكل آمن
+ */
+function appendMeta(container, label, value) {
+  const span = document.createElement("span");
+  span.textContent = `• ${label}: ${value}`;
+  container.appendChild(span);
+}
+
+/**
+ * إضافة شارة بشكل آمن
+ */
+function appendBadge(container, text) {
+  const b = document.createElement("span");
+  b.className = "badge";
+  b.textContent = text;
+  container.appendChild(b);
+}

@@ -173,3 +173,17 @@
   .table tr:hover td {
     background: rgba(0, 245, 255, 0.05);
   }
+
+/* Accordion بسيط لأقسام صفحة النموذج
+   - لا يغيّر تصميم الكروت، فقط يتحكم في إظهار/إخفاء المحتوى */
+.accordion-head {
+  cursor: pointer;
+}
+
+.accordion-item .accordion-body {
+  display: none;
+}
+
+.accordion-item.open .accordion-body {
+  display: block;
+}

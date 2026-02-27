@@ -35,28 +35,29 @@
 
   <div class="hr"></div>
 
-  <h1 class="page-title" data-i18n="model_title">تفاصيل النموذج</h1>
+  <h1 class="page-title" data-i18n="model_title" id="modelTitle">تفاصيل النموذج</h1>
   <p class="page-subtitle" id="modelName"></p>
+  <p class="page-subtitle muted" id="pageStatus"></p>
 
   <section class="grid" style="grid-template-columns: 1fr 1fr;">
-    <article class="neon-card">
-      <div class="card-title" data-i18n="model_specs">المواصفات</div>
-      <div class="card-meta" id="specs"></div>
+    <article class="neon-card accordion-item">
+      <div class="card-title accordion-head" data-i18n="model_specs">المواصفات</div>
+      <div class="card-meta accordion-body" id="specBody"></div>
       <div class="badges" id="badges"></div>
     </article>
 
-    <article class="neon-card">
-      <div class="card-title" data-i18n="model_requirements">المتطلبات</div>
-      <div class="card-meta" id="reqs"></div>
-      <div class="muted" id="reqNote" style="margin-top:10px;"></div>
+    <article class="neon-card accordion-item">
+      <div class="card-title accordion-head" data-i18n="model_requirements">المتطلبات</div>
+      <div class="card-meta accordion-body" id="reqBody"></div>
+      <div class="muted accordion-body" id="reqNote" style="margin-top:10px;"></div>
     </article>
   </section>
 
   <div class="hr"></div>
 
-  <article class="neon-card">
-    <div class="card-title" data-i18n="model_notes">ملاحظات</div>
-    <p class="muted" id="notes" style="margin-top:10px; line-height:1.8;"></p>
+  <article class="neon-card accordion-item">
+    <div class="card-title accordion-head" data-i18n="model_notes">ملاحظات</div>
+    <p class="muted accordion-body" id="notesBody" style="margin-top:10px; line-height:1.8;"></p>
   </article>
 </main>
 
