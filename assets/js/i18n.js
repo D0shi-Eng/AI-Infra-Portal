@@ -75,10 +75,22 @@ const I18N = (() => {
 
       // about
       about_title: "عن المنصة",
-      about_subtitle: "بوابة تقنية لتبسيط اختيار النموذج والهاردوير ً",
+      about_subtitle: "بوابة تقنية لتبسيط اختيار النموذج والهاردوير — قابلة للتوسع",
       about_security: "الأمان",
-      about_security_points:
-        "لا نستخدم innerHTML ",
+      about_security_1: "• لا نستخدم innerHTML أو حقن HTML ديناميكي لتقليل مخاطر XSS.",
+      about_security_2: "• لا نخزن مفاتيح API أو بيانات حساسة داخل الموقع (Static-first).",
+      about_security_3: "• بناء DOM بشكل آمن باستخدام textContent فقط عند العرض.",
+      about_security_4: "• قابل للتوسعة لاحقاً لتطبيق CSP وسياسات حماية أقوى.",
+      about_benefits: "فوائد المنصة",
+      about_benefits_1: "• تساعدك تختار النموذج المناسب حسب جهازك وميزانيتك.",
+      about_benefits_2: "• توضح متطلبات التشغيل بشكل عملي (VRAM/RAM) بدون تعقيد.",
+      about_benefits_3: "• تختصر وقت التجارب العشوائية وتقلل الهدر في الموارد.",
+      about_benefits_4: "• تقارن بين الـ GPUs لتحديد الخيار الأنسب لتشغيل النماذج محلياً.",
+      about_benefits_5: "• حاسبة تقديرية لمتطلبات التشغيل حسب حجم النموذج وطريقة الضغط.",
+      about_benefits_6: "• محتوى مبني على توجيه هندسي (Infrastructure-first).",
+      about_message_title: "رسالة للمستخدم",
+      about_message_text:
+        "هذه المنصة صُممت لتكون مرجعًا عمليًا لاختيار النماذج والعتاد بثقة. حالياً نقدم الأدوات مجاناً وبأداء عالي على GitHub Pages. مستقبلاً سنوسّع المحتوى ونضيف توصيات أعمق، وعند توفر مخزون فعلي قد نطلق متجرًا مخصصًا لتجهيزات الذكاء الاصطناعي.",
 
       // common
       badge_open: "مفتوح",
@@ -157,10 +169,22 @@ const I18N = (() => {
 
       // about
       about_title: "About",
-      about_subtitle: "A technical portal to simplify choosing models & hardware — expandable into a store later",
+      about_subtitle: "A technical portal to simplify choosing models & hardware — expandable",
       about_security: "Security",
-      about_security_points:
-        "No innerHTML • minimal third-party scripts • CSP-ready • backend-ready architecture",
+      about_security_1: "• No innerHTML or dynamic HTML injection to reduce XSS risks.",
+      about_security_2: "• No API keys or sensitive data stored client-side (static-first).",
+      about_security_3: "• Safe DOM updates using textContent only.",
+      about_security_4: "• Ready to extend with CSP and stricter security policies later.",
+      about_benefits: "Platform Benefits",
+      about_benefits_1: "• Helps you pick the right model based on your hardware and budget.",
+      about_benefits_2: "• Clear, practical requirements (VRAM/RAM) without complexity.",
+      about_benefits_3: "• Saves time by reducing trial-and-error and resource waste.",
+      about_benefits_4: "• GPU comparison to choose the best option for local inference.",
+      about_benefits_5: "• A requirements calculator based on model size and quantization.",
+      about_benefits_6: "• Infrastructure-first guidance for real deployment decisions.",
+      about_message_title: "Message to Users",
+      about_message_text:
+        "This platform is built to help you choose AI models and hardware with confidence. Today it runs as a fast, free static portal on GitHub Pages. Over time, we'll expand the database, add deeper recommendations, and once real inventory is available, we may launch a dedicated AI hardware store.",
 
       // common
       badge_open: "Open",
