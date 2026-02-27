@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Model • AI INFRA</title>
+  <title>Models • AI INFRA</title>
 
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/theme.css">
@@ -31,33 +31,29 @@
 </header>
 
 <main class="container">
-  <a class="btn" href="models.html" data-i18n="back_to_models">عودة إلى الدليل</a>
+  <h1 class="page-title" data-i18n="models_title"></h1>
+  <p class="page-subtitle" data-i18n="models_subtitle"></p>
 
-  <div class="hr"></div>
-
-  <h1 class="page-title" data-i18n="model_title">تفاصيل النموذج</h1>
-  <p class="page-subtitle" id="modelName"></p>
-
-  <section class="grid" style="grid-template-columns: 1fr 1fr;">
-    <article class="neon-card">
-      <div class="card-title" data-i18n="model_specs">المواصفات</div>
-      <div class="card-meta" id="specs"></div>
-      <div class="badges" id="badges"></div>
-    </article>
-
-    <article class="neon-card">
-      <div class="card-title" data-i18n="model_requirements">المتطلبات</div>
-      <div class="card-meta" id="reqs"></div>
-      <div class="muted" id="reqNote" style="margin-top:10px;"></div>
-    </article>
+  <section class="toolbar">
+    <div class="search-row">
+      <input id="searchInput" class="input" type="text" data-i18n-placeholder="search_placeholder" placeholder="ابحث باسم النموذج أو الشركة أو النوع…" />
+    </div>
+    <div class="search-row">
+      <select id="typeSelect" class="select"></select>
+      <select id="providerSelect" class="select"></select>
+      <select id="modalitySelect" class="select"></select>
+      <select id="licenseSelect" class="select"></select>
+      <button id="resetBtn" class="btn" data-i18n="filter_reset"></button>
+    </div>
+    <div class="actions-row">
+      <span class="muted" id="countLabel"></span>
+    </div>
   </section>
 
   <div class="hr"></div>
 
-  <article class="neon-card">
-    <div class="card-title" data-i18n="model_notes">ملاحظات</div>
-    <p class="muted" id="notes" style="margin-top:10px; line-height:1.8;"></p>
-  </article>
+  <p id="emptyState" class="muted" style="display:none;"></p>
+  <section class="grid" id="grid"></section>
 </main>
 
 <script src="assets/js/theme.js"></script>
