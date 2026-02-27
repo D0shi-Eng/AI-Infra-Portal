@@ -5,11 +5,6 @@
  * - تحميل models.json عبر طبقة ModelsData
  * - عرض تفاصيل النموذج داخل أقسام (مواصفات/متطلبات/ملاحظات)
  * - تفعيل Accordion لكل قسم
- *
- * ملاحظات أمنية:
- * - لا نستخدم innerHTML إطلاقاً (تفادي XSS)
- * - كل العقد تُبنى بـ createElement/textContent فقط
- * - أي رسالة للمستخدم تمر عبر طبقة i18n
  */
 
 document.addEventListener("DOMContentLoaded", () => {

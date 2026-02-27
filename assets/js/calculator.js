@@ -1,7 +1,6 @@
 /**
  * calculator.js
  * حاسبة VRAM/RAM محسّنة مع عرض بصري (أشرطة تقدم)
- * ملاحظة أمنية: لا نستخدم innerHTML
  */
 
 document.addEventListener("DOMContentLoaded", () => {

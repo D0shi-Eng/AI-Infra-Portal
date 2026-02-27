@@ -3,9 +3,6 @@
  * مسؤول عن:
  * - بناء بطاقات النماذج المحسّنة مع أشرطة VRAM
  * - الفلاتر والبحث
- * ملاحظة أمنية:
- * - لا نستخدم innerHTML إطلاقاً
- * - كل العناصر تُبنى بـ createElement + textContent
  */
 
 document.addEventListener("DOMContentLoaded", async () => {

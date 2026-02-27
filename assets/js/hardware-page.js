@@ -1,7 +1,6 @@
 /**
  * hardware-page.js
  * بناء جدول سريع للهاردوير
- * - بدون innerHTML
  */
 
 document.addEventListener("DOMContentLoaded", async () => {

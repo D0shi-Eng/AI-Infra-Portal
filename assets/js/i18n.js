@@ -3,8 +3,6 @@
  * مسؤول عن:
  * - إدارة اللغة (عربي/إنجليزي) مع حفظ الاختيار في localStorage
  * - تطبيق النصوص على العناصر التي تحمل data-i18n
- * ملاحظة أمنية:
- * - لا نستخدم innerHTML إطلاقاً لتفادي XSS
  */
 
 const I18N = (() => {
@@ -76,11 +74,6 @@ const I18N = (() => {
       // about
       about_title: "عن المنصة",
       about_subtitle: "بوابة تقنية لتبسيط اختيار النموذج والهاردوير — قابلة للتوسع",
-      about_security_title: "الأمان",
-      about_security_1: "لا نستخدم innerHTML أو حقن HTML ديناميكي لتقليل مخاطر XSS.",
-      about_security_2: "لا نخزن مفاتيح API أو بيانات حساسة داخل الموقع (Static-first).",
-      about_security_3: "عرض البيانات يتم عبر textContent فقط لزيادة الأمان.",
-      about_security_4: "جاهز لإضافة CSP وسياسات حماية أقوى لاحقاً.",
       about_benefits_title: "فوائد المنصة",
       about_benefits_1: "تساعدك تختار النموذج المناسب حسب جهازك وميزانيتك.",
       about_benefits_2: "توضح متطلبات التشغيل بشكل عملي (VRAM/RAM) بدون تعقيد.",
@@ -201,11 +194,6 @@ const I18N = (() => {
       // about
       about_title: "About",
       about_subtitle: "A technical portal to simplify choosing models & hardware — expandable",
-      about_security_title: "Security",
-      about_security_1: "No innerHTML or dynamic HTML injection to reduce XSS risks.",
-      about_security_2: "No API keys or sensitive data stored client-side (static-first).",
-      about_security_3: "Data is rendered via textContent only for safer DOM updates.",
-      about_security_4: "Ready to extend with CSP and stricter security policies later.",
       about_benefits_title: "Platform Benefits",
       about_benefits_1: "Helps you pick the right model based on your hardware and budget.",
       about_benefits_2: "Clear, practical requirements (VRAM/RAM) without complexity.",

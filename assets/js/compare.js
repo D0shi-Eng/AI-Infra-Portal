@@ -1,7 +1,6 @@
 /**
  * compare.js
  * مقارنة GPU محسّنة مع أشرطة بصرية وتفاصيل أغنى
- * ملاحظات أمنية: لا نستخدم innerHTML
  */
 
 document.addEventListener("DOMContentLoaded", async () => {
