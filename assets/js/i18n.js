@@ -292,8 +292,12 @@ const I18N = (() => {
     if (btn) btn.textContent = lang === "ar" ? "EN" : "AR";
   }
 
+  let initialized = false;
+
   function init() {
     apply();
+    if (initialized) return;
+    initialized = true;
     const btn = document.getElementById("langToggle");
     if (btn) {
       btn.addEventListener("click", () => {
