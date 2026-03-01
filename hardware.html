@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <script>(function(){var l=localStorage.getItem('lang');if(l==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';}})()</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>(function () { var l = localStorage.getItem('lang'); if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; } })()</script>
   <title>Hardware • AI INFRA</title>
 
   <link rel="stylesheet" href="assets/css/base.css">
@@ -14,111 +15,136 @@
 </head>
 
 <body>
-<header class="navbar">
-  <div class="nav-left">
-    <div class="logo" data-i18n="brand">AI INFRA</div>
-    <nav class="nav-links">
-      <a href="index.html" data-i18n="nav_home"></a>
-      <a href="models.html" data-i18n="nav_models"></a>
-      <a href="hardware.html" data-i18n="nav_hardware"></a>
-      <a href="compare.html" data-i18n="nav_compare"></a>
-      <a href="calculator.html" data-i18n="nav_calc"></a>
-      <a href="about.html" data-i18n="nav_about"></a>
-    </nav>
-  </div>
-  <div class="controls">
-    <button id="langToggle">EN</button>
-    <button id="themeToggle">☀</button>
-  </div>
-</header>
-
-<main class="container">
-  <h1 class="page-title" data-i18n="hardware_title"></h1>
-  <p class="page-subtitle" data-i18n="hardware_subtitle"></p>
-
-  <article class="neon-card">
-    <div class="card-title" data-i18n="hw_table_title"></div>
-    <div style="overflow:auto; margin-top:12px;">
-      <table class="table" id="hwTable"></table>
+  <a href="#main" class="skip-link" data-i18n="skip_link">انتقال للمحتوى</a>
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="logo" data-i18n="brand">AI INFRA</div>
+      <nav class="nav-links">
+        <a href="index.html" data-i18n="nav_home"></a>
+        <a href="models.html" data-i18n="nav_models"></a>
+        <a href="hardware.html" data-i18n="nav_hardware"></a>
+        <a href="compare.html" data-i18n="nav_compare"></a>
+        <a href="calculator.html" data-i18n="nav_calc"></a>
+        <a href="lessons.html" data-i18n="nav_lessons"></a>
+        <a href="recommendations.html" data-i18n="nav_recommendations"></a>
+        <a href="ask.html" data-i18n="nav_ask"></a>
+        <a href="about.html" data-i18n="nav_about"></a>
+      </nav>
     </div>
-  </article>
+    <div class="controls">
+      <button id="langToggle" type="button" aria-label="تبديل اللغة">EN</button>
+      <button id="themeToggle" type="button" aria-label="تبديل الوضع الليلي">☀</button>
+    </div>
+  </header>
 
-  <div class="hr"></div>
-
-  <section class="grid reveal-stagger">
-    <article class="neon-card">
-      <div class="card-title">🟢 LLM صغير (≤ 8B)</div>
-      <p class="muted" style="margin-top:10px; line-height:1.8;">
-        • GPU: 8–12GB VRAM (مريح)<br>
-        • RAM: 16–32GB<br>
-        • تخزين: NVMe<br>
-        • تبريد: هوائي جيد
-      </p>
-    </article>
+  <main class="container">
+    <h1 class="page-title" data-i18n="hardware_title"></h1>
+    <p class="page-subtitle" data-i18n="hardware_subtitle"></p>
 
     <article class="neon-card">
-      <div class="card-title">🟡 LLM متوسط (13–34B)</div>
-      <p class="muted" style="margin-top:10px; line-height:1.8;">
-        • GPU: 16–24GB VRAM (يفضل أكثر)<br>
-        • RAM: 32–64GB<br>
-        • تخزين: NVMe Gen4<br>
-        • تبريد: هوائي احترافي أو AIO
-      </p>
+      <div class="card-title" data-i18n="hw_table_title"></div>
+      <div style="overflow:auto; margin-top:12px;">
+        <table class="table" id="hwTable"></table>
+      </div>
     </article>
 
-    <article class="neon-card">
-      <div class="card-title">🔴 LLM كبير (≥ 70B)</div>
-      <p class="muted" style="margin-top:10px; line-height:1.8;">
-        • GPU: 48–80GB VRAM أو Multi-GPU<br>
-        • RAM: 128GB+<br>
-        • PCIe lanes كافية<br>
-        • تبريد: AIO/Water + كيس تهوية ممتازة
-      </p>
-    </article>
-  </section>
-</main>
+    <div class="hr"></div>
 
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">AI INFRA</div>
-      <p class="footer-desc" data-i18n="footer_desc">منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء الاصطناعي.</p>
-    </div>
-    <div>
-      <div class="footer-heading" data-i18n="footer_nav">التنقّل</div>
-      <ul class="footer-links">
-        <li><a href="index.html" data-i18n="nav_home">الرئيسية</a></li>
-        <li><a href="models.html" data-i18n="nav_models">النماذج</a></li>
-        <li><a href="hardware.html" data-i18n="nav_hardware">الهاردوير</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-heading" data-i18n="footer_tools">الأدوات</div>
-      <ul class="footer-links">
-        <li><a href="compare.html" data-i18n="nav_compare">مقارنة GPU</a></li>
-        <li><a href="calculator.html" data-i18n="nav_calc">حاسبة</a></li>
-        <li><a href="about.html" data-i18n="nav_about">عن المنصة</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-heading" data-i18n="footer_soon">قريباً</div>
-      <ul class="footer-links">
-        <li><a href="#" data-i18n="footer_store">متجر التجهيزات</a></li>
-        <li><a href="#" data-i18n="footer_api">API مطورين</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© <span id="footerYear">2026</span> AI INFRA.</span>
-    <span class="footer-badge">⚡ Static-First • GitHub Pages</span>
-  </div>
-</footer>
+    <h2 class="page-title" style="font-size:1.4rem;" data-i18n="gpu_models_title">أي نموذج يناسب كرتّي؟</h2>
+    <p class="page-subtitle muted" data-i18n="gpu_models_subtitle">اختر كرت الشاشة لعرض النماذج المناسبة</p>
+    <section class="toolbar">
+      <div class="actions-row">
+        <label class="muted" for="gpuModelsSelect" data-i18n="gpu_models_select">اختر الكرت</label>
+        <select id="gpuModelsSelect" class="select" aria-label="اختر كرت الشاشة"></select>
+      </div>
+    </section>
+    <div id="gpuModelsList" class="card-meta" style="margin-top:12px; min-height:40px;"></div>
 
-<script src="assets/js/theme.js"></script>
-<script src="assets/js/i18n.js"></script>
-<script src="assets/js/app.js"></script>
+    <div class="hr"></div>
 
-<script src="assets/js/hardware-data.js"></script>
-<script src="assets/js/hardware-page.js"></script>
+    <section class="grid reveal-stagger">
+      <article class="neon-card">
+        <div class="card-title">🟢 LLM صغير (≤ 8B)</div>
+        <p class="muted" style="margin-top:10px; line-height:1.8;">
+          • GPU: 8–12GB VRAM (مريح)<br>
+          • RAM: 16–32GB<br>
+          • تخزين: NVMe<br>
+          • تبريد: هوائي جيد
+        </p>
+      </article>
+
+      <article class="neon-card">
+        <div class="card-title">🟡 LLM متوسط (13–34B)</div>
+        <p class="muted" style="margin-top:10px; line-height:1.8;">
+          • GPU: 16–24GB VRAM (يفضل أكثر)<br>
+          • RAM: 32–64GB<br>
+          • تخزين: NVMe Gen4<br>
+          • تبريد: هوائي احترافي أو AIO
+        </p>
+      </article>
+
+      <article class="neon-card">
+        <div class="card-title">🔴 LLM كبير (≥ 70B)</div>
+        <p class="muted" style="margin-top:10px; line-height:1.8;">
+          • GPU: 48–80GB VRAM أو Multi-GPU<br>
+          • RAM: 128GB+<br>
+          • PCIe lanes كافية<br>
+          • تبريد: AIO/Water + كيس تهوية ممتازة
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">AI INFRA</div>
+        <p class="footer-desc" data-i18n="footer_desc">منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء
+          الاصطناعي.</p>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_nav">التنقّل</div>
+        <ul class="footer-links">
+          <li><a href="index.html" data-i18n="nav_home">الرئيسية</a></li>
+          <li><a href="models.html" data-i18n="nav_models">النماذج</a></li>
+          <li><a href="hardware.html" data-i18n="nav_hardware">الهاردوير</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_tools">الأدوات</div>
+        <ul class="footer-links">
+          <li><a href="compare.html" data-i18n="nav_compare">مقارنة GPU</a></li>
+          <li><a href="calculator.html" data-i18n="nav_calc">حاسبة</a></li>
+          <li><a href="about.html" data-i18n="nav_about">عن المنصة</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_soon">قريباً</div>
+        <ul class="footer-links">
+          <li><a href="https://github.com/D0shi-Eng/AI-Infra-Portal/discussions" target="_blank" rel="noopener noreferrer" data-i18n="footer_community">المجتمع</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© <span id="footerYear">2026</span> AI INFRA. <span data-i18n="footer_updated">آخر تحديث: الأحد 1 مارس 2026</span></span>
+      <div class="footer-badge-group">
+        <span class="footer-badge">⚡ Static-First • GitHub Pages</span>
+        <div class="footer-credit">
+        <p data-i18n="footer_credit">قام ببناء وتطوير هذه المنصة: Eng:Abdulrahman</p>
+        <p>📧 <span data-i18n="footer_contact">للتواصل:</span> <a href="mailto:abdulrahmand19@hotmail.com">abdulrahmand19@hotmail.com</a></p>
+        <p>X: <a href="https://x.com/Abdulr3hm33n" target="_blank" rel="noopener noreferrer">@Abdulr3hm33n</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/app.js"></script>
+
+  <script src="assets/js/models-data.js"></script>
+  <script src="assets/js/hardware-data.js"></script>
+  <script src="assets/js/hardware-page.js"></script>
 </body>
+
 </html>

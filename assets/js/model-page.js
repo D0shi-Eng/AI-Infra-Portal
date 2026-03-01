@@ -55,14 +55,26 @@ function initAccordion(ctx) {
     const body = item.querySelector(".accordion-body");
     if (!head || !body) return;
 
-    // نجعل العنوان قابلاً للتركيز والاستخدام بالكيبورد
+    const bodyId = "accordion-body-" + index;
+    body.id = bodyId;
     head.setAttribute("tabindex", "0");
     head.setAttribute("role", "button");
+    head.setAttribute("aria-expanded", "true");
+    head.setAttribute("aria-controls", bodyId);
 
     const toggle = () => {
       const isOpen = item.classList.contains("open");
-      ctx.accordionItems.forEach((other) => other.classList.remove("open"));
-      if (!isOpen) item.classList.add("open");
+      ctx.accordionItems.forEach((other) => {
+        other.classList.remove("open");
+        const h = other.querySelector(".accordion-head");
+        if (h) h.setAttribute("aria-expanded", "false");
+      });
+      if (!isOpen) {
+        item.classList.add("open");
+        head.setAttribute("aria-expanded", "true");
+      } else {
+        head.setAttribute("aria-expanded", "false");
+      }
     };
 
     head.addEventListener("click", toggle);
@@ -288,6 +300,85 @@ function renderModel(ctx, model) {
         ? "لا توجد ملاحظات."
         : "No notes.");
   }
+
+  setPageSeo(model);
+  addShareButton(model);
+}
+
+function setPageSeo(model) {
+  const name = (model.name || model.id || "").trim();
+  if (name) {
+    document.title = name + " • AI INFRA";
+  }
+  let metaDesc = document.querySelector('meta[name="description"]');
+  if (!metaDesc) {
+    metaDesc = document.createElement("meta");
+    metaDesc.setAttribute("name", "description");
+    document.head.appendChild(metaDesc);
+  }
+  const descText = (model.notes || "").slice(0, 155);
+  metaDesc.setAttribute("content", descText || name + " — مواصفات ومتطلبات تشغيل");
+
+  let scriptJsonLd = document.getElementById("json-ld-model");
+  if (scriptJsonLd) scriptJsonLd.remove();
+  scriptJsonLd = document.createElement("script");
+  scriptJsonLd.id = "json-ld-model";
+  scriptJsonLd.type = "application/ld+json";
+  const ld = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: model.name || model.id,
+    applicationCategory: "DeveloperApplication",
+    description: (model.notes || "").slice(0, 200),
+  };
+  if (model.provider) ld.author = { "@type": "Organization", name: model.provider };
+  scriptJsonLd.textContent = JSON.stringify(ld);
+  document.head.appendChild(scriptJsonLd);
+}
+
+function addShareButton(model) {
+  const container = document.querySelector(".container");
+  const existing = document.getElementById("modelShareBtn");
+  if (existing || !container) return;
+  const btn = document.createElement("button");
+  btn.id = "modelShareBtn";
+  btn.type = "button";
+  btn.className = "btn";
+  btn.textContent = I18N.t("btn_share");
+  btn.style.marginBottom = "12px";
+  btn.addEventListener("click", () => {
+    const url = location.href;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => {
+        btn.textContent = I18N.t("btn_share_done");
+        setTimeout(() => { btn.textContent = I18N.t("btn_share"); }, 2000);
+      }).catch(() => { fallbackCopy(url, btn); });
+    } else {
+      fallbackCopy(url, btn);
+    }
+  });
+  const firstLink = container.querySelector("a.btn");
+  if (firstLink && firstLink.nextSibling) {
+    container.insertBefore(btn, firstLink.nextSibling);
+  } else {
+    container.insertBefore(btn, container.firstChild);
+  }
+}
+
+function fallbackCopy(url, btn) {
+  const ta = document.createElement("textarea");
+  ta.value = url;
+  ta.setAttribute("readonly", "");
+  ta.style.position = "fixed";
+  ta.style.left = "-9999px";
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand("copy");
+    btn.textContent = I18N.t("btn_share_done");
+    setTimeout(() => { btn.textContent = I18N.t("btn_share"); }, 2000);
+  } catch (_) {}
+  document.body.removeChild(ta);
 }
 
 /**

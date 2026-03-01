@@ -5,8 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>(function () { var l = localStorage.getItem('lang'); if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; } })()</script>
-  <title>Compare • AI INFRA</title>
-
+  <title>Recommendations • AI INFRA</title>
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/theme.css">
   <link rel="stylesheet" href="assets/css/layout.css">
@@ -38,61 +37,39 @@
   </header>
 
   <main id="main" class="container">
-    <h1 class="page-title" data-i18n="compare_title"></h1>
-    <p class="page-subtitle" data-i18n="compare_subtitle"></p>
+    <h1 class="page-title" data-i18n="recommendations_title">توصيات العتاد</h1>
+    <p class="page-subtitle" data-i18n="recommendations_subtitle">تجميعات مقترحة حسب مستواك مع سعر تقريبي</p>
 
-    <section class="toolbar">
-      <div class="actions-row">
-        <select id="gpuA" class="select"></select>
-        <select id="gpuB" class="select"></select>
-        <button id="cmpBtn" class="btn">Compare</button>
-      </div>
-    </section>
-
-    <div class="hr"></div>
-
-    <section class="grid" style="grid-template-columns:1fr 1fr;">
+    <section class="grid reveal-stagger" style="grid-template-columns: 1fr;">
       <article class="neon-card">
-        <div class="card-title">GPU A</div>
-        <div class="card-meta" id="aMeta"></div>
+        <div class="card-title">🟢 مبتدئ — تشغيل نماذج ≤ 8B</div>
+        <p class="muted" style="margin-top:10px; line-height:1.8;">
+          GPU: RTX 4060 أو 4070 (8–12 GB) • معالج: Ryzen 5 أو i5 • RAM: 16–32 GB • تخزين: NVMe 500 GB • سعر تقريبي: 800–1200 دولار (أو ما يعادلها).
+        </p>
+        <p class="muted" style="margin-top:8px;"><a href="models.html">استعرض النماذج المناسبة</a> · <a href="hardware.html">جدول الهاردوير</a></p>
       </article>
       <article class="neon-card">
-        <div class="card-title">GPU B</div>
-        <div class="card-meta" id="bMeta"></div>
+        <div class="card-title">🟡 متوسط — نماذج 13B–34B</div>
+        <p class="muted" style="margin-top:10px; line-height:1.8;">
+          GPU: RTX 4080 أو 4090 (16–24 GB) • معالج: Ryzen 7 أو i7 • RAM: 32–64 GB • تخزين: NVMe Gen4 1 TB • سعر تقريبي: 2000–3500 دولار (أو ما يعادلها).
+        </p>
+        <p class="muted" style="margin-top:8px;"><a href="compare.html">قارن كروت الشاشة</a> · <a href="calculator.html">الحاسبة</a></p>
+      </article>
+      <article class="neon-card">
+        <div class="card-title">🔴 خبير — نماذج 70B+ أو Multi-GPU</div>
+        <p class="muted" style="margin-top:10px; line-height:1.8;">
+          GPU: RTX 6000 Ada (48 GB) أو A100/H100 (80 GB) • معالج: Ryzen 9 أو Xeon • RAM: 128 GB+ • سعر تقريبي: 8000–25000+ دولار (أو ما يعادلها). للمختبرين والسيرفرات.
+        </p>
+        <p class="muted" style="margin-top:8px;"><a href="hardware.html">الهاردوير</a> · <a href="models.html">دليل النماذج</a></p>
       </article>
     </section>
-
-    <article class="neon-card">
-      <div class="card-title">Verdict</div>
-      <p class="muted" id="verdict" style="margin-top:10px; line-height:1.8;"></p>
-    </article>
-
-    <div class="hr"></div>
-
-    <h2 class="page-title" style="font-size:1.4rem;" data-i18n="compare_models_title">مقارنة النماذج</h2>
-    <p class="page-subtitle muted" data-i18n="compare_models_subtitle">اختر نموذجين أو ثلاثة للمقارنة</p>
-    <section class="toolbar">
-      <div class="actions-row">
-        <select id="modelSelectA" class="select" aria-label="النموذج الأول"></select>
-        <select id="modelSelectB" class="select" aria-label="النموذج الثاني"></select>
-        <select id="modelSelectC" class="select" aria-label="النموذج الثالث"></select>
-        <button id="modelCompareBtn" class="btn" data-i18n="compare_models_btn">قارن النماذج</button>
-      </div>
-    </section>
-    <div id="modelCompareTableWrap" style="display:none; overflow:auto; margin-top:16px;">
-      <table class="table">
-        <thead id="modelCompareTableHead"></thead>
-        <tbody id="modelCompareTableBody"></tbody>
-      </table>
-    </div>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
       <div>
         <div class="footer-brand">AI INFRA</div>
-        <p class="footer-desc" data-i18n="footer_desc">منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء
-          الاصطناعي.</p>
+        <p class="footer-desc" data-i18n="footer_desc">منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء الاصطناعي.</p>
       </div>
       <div>
         <div class="footer-heading" data-i18n="footer_nav">التنقّل</div>
@@ -107,6 +84,8 @@
         <ul class="footer-links">
           <li><a href="compare.html" data-i18n="nav_compare">مقارنة GPU</a></li>
           <li><a href="calculator.html" data-i18n="nav_calc">حاسبة</a></li>
+          <li><a href="lessons.html" data-i18n="nav_lessons">الدروس</a></li>
+          <li><a href="recommendations.html" data-i18n="nav_recommendations">التوصيات</a></li>
           <li><a href="about.html" data-i18n="nav_about">عن المنصة</a></li>
         </ul>
       </div>
@@ -133,11 +112,6 @@
   <script src="assets/js/theme.js"></script>
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/app.js"></script>
-
-  <script src="assets/js/models-data.js"></script>
-  <script src="assets/js/hardware-data.js"></script>
-  <script src="assets/js/compare.js"></script>
-  <script src="assets/js/compare-models.js"></script>
 </body>
 
 </html>

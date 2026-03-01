@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>(function () { var l = localStorage.getItem('lang'); if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; } })()</script>
+  <title>Lessons • AI INFRA</title>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+
+<body>
+  <a href="#main" class="skip-link" data-i18n="skip_link">انتقال للمحتوى</a>
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="logo" data-i18n="brand">AI INFRA</div>
+      <nav class="nav-links">
+        <a href="index.html" data-i18n="nav_home"></a>
+        <a href="models.html" data-i18n="nav_models"></a>
+        <a href="hardware.html" data-i18n="nav_hardware"></a>
+        <a href="compare.html" data-i18n="nav_compare"></a>
+        <a href="calculator.html" data-i18n="nav_calc"></a>
+        <a href="lessons.html" data-i18n="nav_lessons"></a>
+        <a href="recommendations.html" data-i18n="nav_recommendations"></a>
+        <a href="ask.html" data-i18n="nav_ask"></a>
+        <a href="about.html" data-i18n="nav_about"></a>
+      </nav>
+    </div>
+    <div class="controls">
+      <button id="langToggle" type="button" aria-label="تبديل اللغة">EN</button>
+      <button id="themeToggle" type="button" aria-label="تبديل الوضع الليلي">☀</button>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <h1 class="page-title" data-i18n="lessons_title">دروس المنصة</h1>
+    <p class="page-subtitle" data-i18n="lessons_subtitle">محتوى موجّه حسب مستواك</p>
+    <p class="muted" style="max-width:720px; margin-bottom:32px; line-height:1.85; font-size:1.02rem;" data-i18n="lessons_intro">من مبتدئ إلى خبير: خطوات عملية لاختيار النماذج، حساب المتطلبات، ومقارنة العتاد. كل فئة لها أدواتها وطريقة حساب واضحة.</p>
+
+    <section class="grid reveal-stagger" style="grid-template-columns: 1fr;">
+      <article class="neon-card">
+        <div class="card-title" style="font-size:1.25rem;">🟢 <span data-i18n="lessons_beginner">مبتدئ</span></div>
+        <p class="muted" style="margin-top:12px; line-height:1.85;" data-i18n="lessons_beginner_goal">تهدف هذه المرحلة إلى فهم أساسيات النماذج (صغير / متوسط / كبير)، وربط حجم النموذج باحتياج VRAM وRAM، ومعرفة أي كرت يناسبك للبداية.</p>
+        <div class="card-title" style="font-size:0.95rem; margin-top:20px; opacity:0.95;" data-i18n="lessons_how_calc">كيف تحسب وتستفيد</div>
+        <p class="muted" style="margin-top:8px; line-height:1.85;" data-i18n="lessons_beginner_steps">ادخل إلى الحاسبة ← أدخل عدد المعاملات (مثلاً 7 أو 8 للنماذج الصغيرة) ← اختر مستوى الكوانتايز (مثل Q4 للتوازن) ← راجع تقدير VRAM وRAM ← قارن النتيجة مع جدول الهاردوير لمعرفة أي كرت يكفي.</p>
+        <div class="card-title" style="font-size:0.95rem; margin-top:20px; opacity:0.95;" data-i18n="lessons_tools">الأدوات الموصى بها</div>
+        <p class="muted" style="margin-top:8px; line-height:1.9;">
+          <a href="models.html">دليل النماذج</a> · <a href="calculator.html">الحاسبة</a> · <a href="hardware.html">الهاردوير</a>
+        </p>
+      </article>
+
+      <article class="neon-card">
+        <div class="card-title" style="font-size:1.25rem;">🟡 <span data-i18n="lessons_intermediate">متوسط</span></div>
+        <p class="muted" style="margin-top:12px; line-height:1.85;" data-i18n="lessons_intermediate_goal">التركيز على المقارنة بين نماذج وكروت لاتخاذ قرار شراء أو ترقية. تفهم كيف تقارن VRAM والتكلفة والأداء قبل الشراء.</p>
+        <div class="card-title" style="font-size:0.95rem; margin-top:20px; opacity:0.95;" data-i18n="lessons_how_calc">كيف تحسب وتستفيد</div>
+        <p class="muted" style="margin-top:8px; line-height:1.85;" data-i18n="lessons_intermediate_steps">استخدم مقارنة GPU لاختيار كرتين ومقارنة VRAM والتوصيات ← استخدم قسم «مقارنة النماذج» في نفس الصفحة لمقارنة نموذجين أو ثلاثة ← راجع صفحة التوصيات لنطاقات الأسعار والتجميعات المناسبة لمستواك.</p>
+        <div class="card-title" style="font-size:0.95rem; margin-top:20px; opacity:0.95;" data-i18n="lessons_tools">الأدوات الموصى بها</div>
+        <p class="muted" style="margin-top:8px; line-height:1.9;">
+          <a href="compare.html">مقارنة GPU + مقارنة النماذج</a> · <a href="recommendations.html">التوصيات</a>
+        </p>
+      </article>
+
+      <article class="neon-card">
+        <div class="card-title" style="font-size:1.25rem;">🔴 <span data-i18n="lessons_expert">خبير</span></div>
+        <p class="muted" style="margin-top:12px; line-height:1.85;" data-i18n="lessons_expert_goal">استغلال كل الأدوات معاً: الفلاتر، مقارنة النماذج، الحاسبة مع اختيار نموذج، و«أي نموذج يناسب كرتّي» لتحقيق أقصى استفادة من المنصة.</p>
+        <div class="card-title" style="font-size:0.95rem; margin-top:20px; opacity:0.95;" data-i18n="lessons_how_calc">كيف تحسب وتستفيد</div>
+        <p class="muted" style="margin-top:8px; line-height:1.85;" data-i18n="lessons_expert_steps">في الحاسبة: اختر «نموذجاً» من القائمة لملء المعاملات والسياق تلقائياً ثم راجع التقدير ← في الهاردوير: اختر كرتك لترى قائمة النماذج المناسبة ← استخدم دليل النماذج مع الفلاتر ومقارنة النماذج لاختيار نموذج ثم ربطه بالعتاد والتوصيات.</p>
+        <div class="card-title" style="font-size:0.95rem; margin-top:20px; opacity:0.95;" data-i18n="lessons_tools">الأدوات الموصى بها</div>
+        <p class="muted" style="margin-top:8px; line-height:1.9;">
+          <a href="models.html">دليل النماذج</a> · <a href="compare.html">المقارنة (GPU + نماذج)</a> · <a href="calculator.html">الحاسبة</a> · <a href="hardware.html">الهاردوير (أي نموذج يناسب كرتّي)</a> · <a href="recommendations.html">التوصيات</a>
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">AI INFRA</div>
+        <p class="footer-desc" data-i18n="footer_desc">منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء الاصطناعي.</p>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_nav">التنقّل</div>
+        <ul class="footer-links">
+          <li><a href="index.html" data-i18n="nav_home">الرئيسية</a></li>
+          <li><a href="models.html" data-i18n="nav_models">النماذج</a></li>
+          <li><a href="hardware.html" data-i18n="nav_hardware">الهاردوير</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_tools">الأدوات</div>
+        <ul class="footer-links">
+          <li><a href="compare.html" data-i18n="nav_compare">مقارنة GPU</a></li>
+          <li><a href="calculator.html" data-i18n="nav_calc">حاسبة</a></li>
+          <li><a href="lessons.html" data-i18n="nav_lessons">الدروس</a></li>
+          <li><a href="recommendations.html" data-i18n="nav_recommendations">التوصيات</a></li>
+          <li><a href="about.html" data-i18n="nav_about">عن المنصة</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_soon">قريباً</div>
+        <ul class="footer-links">
+          <li><a href="https://github.com/D0shi-Eng/AI-Infra-Portal/discussions" target="_blank" rel="noopener noreferrer" data-i18n="footer_community">المجتمع</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© <span id="footerYear">2026</span> AI INFRA. <span data-i18n="footer_updated">آخر تحديث: الأحد 1 مارس 2026</span></span>
+      <div class="footer-badge-group">
+        <span class="footer-badge">⚡ Static-First • GitHub Pages</span>
+        <div class="footer-credit">
+        <p data-i18n="footer_credit">قام ببناء وتطوير هذه المنصة: Eng:Abdulrahman</p>
+        <p>📧 <span data-i18n="footer_contact">للتواصل:</span> <a href="mailto:abdulrahmand19@hotmail.com">abdulrahmand19@hotmail.com</a></p>
+        <p>X: <a href="https://x.com/Abdulr3hm33n" target="_blank" rel="noopener noreferrer">@Abdulr3hm33n</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+
+</html>

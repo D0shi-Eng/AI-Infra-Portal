@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <script>(function(){var l=localStorage.getItem('lang');if(l==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';}})()</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>(function () { var l = localStorage.getItem('lang'); if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; } })()</script>
   <title>Calculator • AI INFRA</title>
 
   <link rel="stylesheet" href="assets/css/base.css">
@@ -14,103 +15,119 @@
 </head>
 
 <body>
-<header class="navbar">
-  <div class="nav-left">
-    <div class="logo" data-i18n="brand">AI INFRA</div>
-    <nav class="nav-links">
-      <a href="index.html" data-i18n="nav_home"></a>
-      <a href="models.html" data-i18n="nav_models"></a>
-      <a href="hardware.html" data-i18n="nav_hardware"></a>
-      <a href="compare.html" data-i18n="nav_compare"></a>
-      <a href="calculator.html" data-i18n="nav_calc"></a>
-      <a href="about.html" data-i18n="nav_about"></a>
-    </nav>
-  </div>
-  <div class="controls">
-    <button id="langToggle">EN</button>
-    <button id="themeToggle">☀</button>
-  </div>
-</header>
+  <a href="#main" class="skip-link" data-i18n="skip_link">انتقال للمحتوى</a>
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="logo" data-i18n="brand">AI INFRA</div>
+      <nav class="nav-links">
+        <a href="index.html" data-i18n="nav_home"></a>
+        <a href="models.html" data-i18n="nav_models"></a>
+        <a href="hardware.html" data-i18n="nav_hardware"></a>
+        <a href="compare.html" data-i18n="nav_compare"></a>
+        <a href="calculator.html" data-i18n="nav_calc"></a>
+        <a href="lessons.html" data-i18n="nav_lessons"></a>
+        <a href="recommendations.html" data-i18n="nav_recommendations"></a>
+        <a href="ask.html" data-i18n="nav_ask"></a>
+        <a href="about.html" data-i18n="nav_about"></a>
+      </nav>
+    </div>
+    <div class="controls">
+      <button id="langToggle" type="button" aria-label="تبديل اللغة">EN</button>
+      <button id="themeToggle" type="button" aria-label="تبديل الوضع الليلي">☀</button>
+    </div>
+  </header>
 
-<main class="container">
-  <h1 class="page-title" data-i18n="calc_title"></h1>
-  <p class="page-subtitle" data-i18n="calc_subtitle"></p>
+  <main id="main" class="container">
+    <h1 class="page-title" data-i18n="calc_title"></h1>
+    <p class="page-subtitle" data-i18n="calc_subtitle"></p>
 
-  <article class="neon-card">
-    <div class="toolbar">
-      <div class="search-row">
-        <label class="muted" data-i18n="calc_params_label" for="paramsB"></label>
-        <input id="paramsB" class="input" type="number" min="0.1" step="0.1" value="7" />
+    <article class="neon-card">
+      <div class="toolbar">
+        <div class="search-row">
+          <label class="muted" data-i18n="calc_select_model" for="modelSelectCalc"></label>
+          <select id="modelSelectCalc" class="select" aria-label="اختيار نموذج لملء الحقول"></select>
+        </div>
+        <div class="search-row">
+          <label class="muted" data-i18n="calc_params_label" for="paramsB"></label>
+          <input id="paramsB" class="input" type="number" min="0.1" step="0.1" value="7" />
+        </div>
+
+        <div class="search-row">
+          <label class="muted" data-i18n="calc_quant_label" for="quant"></label>
+          <select id="quant" class="select">
+            <option value="fp16">FP16 (16-bit)</option>
+            <option value="int8">INT8 (8-bit)</option>
+            <option value="q6">Q6</option>
+            <option value="q5">Q5</option>
+            <option value="q4" selected>Q4</option>
+          </select>
+        </div>
+
+        <div class="search-row">
+          <label class="muted" data-i18n="calc_context_label" for="contextK"></label>
+          <input id="contextK" class="input" type="number" min="0" step="1" value="8" />
+        </div>
+
+        <div class="actions-row">
+          <button id="calcBtn" class="btn" data-i18n="calc_btn"></button>
+        </div>
       </div>
 
-      <div class="search-row">
-        <label class="muted" data-i18n="calc_quant_label" for="quant"></label>
-        <select id="quant" class="select">
-          <option value="fp16">FP16 (16-bit)</option>
-          <option value="int8">INT8 (8-bit)</option>
-          <option value="q6">Q6</option>
-          <option value="q5">Q5</option>
-          <option value="q4" selected>Q4</option>
-        </select>
+      <div class="hr"></div>
+
+      <div class="card-title" data-i18n="calc_result"></div>
+      <p class="muted" id="calcOut" style="margin-top:10px; line-height:1.9;"></p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">AI INFRA</div>
+        <p class="footer-desc" data-i18n="footer_desc">منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء
+          الاصطناعي.</p>
       </div>
-
-      <div class="search-row">
-        <label class="muted" data-i18n="calc_context_label" for="contextK"></label>
-        <input id="contextK" class="input" type="number" min="0" step="1" value="8" />
+      <div>
+        <div class="footer-heading" data-i18n="footer_nav">التنقّل</div>
+        <ul class="footer-links">
+          <li><a href="index.html" data-i18n="nav_home">الرئيسية</a></li>
+          <li><a href="models.html" data-i18n="nav_models">النماذج</a></li>
+          <li><a href="hardware.html" data-i18n="nav_hardware">الهاردوير</a></li>
+        </ul>
       </div>
-
-      <div class="actions-row">
-        <button id="calcBtn" class="btn" data-i18n="calc_btn"></button>
+      <div>
+        <div class="footer-heading" data-i18n="footer_tools">الأدوات</div>
+        <ul class="footer-links">
+          <li><a href="compare.html" data-i18n="nav_compare">مقارنة GPU</a></li>
+          <li><a href="calculator.html" data-i18n="nav_calc">حاسبة</a></li>
+          <li><a href="about.html" data-i18n="nav_about">عن المنصة</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_soon">قريباً</div>
+        <ul class="footer-links">
+          <li><a href="https://github.com/D0shi-Eng/AI-Infra-Portal/discussions" target="_blank" rel="noopener noreferrer" data-i18n="footer_community">المجتمع</a></li>
+        </ul>
       </div>
     </div>
-
-    <div class="hr"></div>
-
-    <div class="card-title" data-i18n="calc_result"></div>
-    <p class="muted" id="calcOut" style="margin-top:10px; line-height:1.9;"></p>
-  </article>
-</main>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">AI INFRA</div>
-      <p class="footer-desc" data-i18n="footer_desc">منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء الاصطناعي.</p>
+    <div class="footer-bottom">
+      <span class="footer-copy">© <span id="footerYear">2026</span> AI INFRA. <span data-i18n="footer_updated">آخر تحديث: الأحد 1 مارس 2026</span></span>
+      <div class="footer-badge-group">
+        <span class="footer-badge">⚡ Static-First • GitHub Pages</span>
+        <div class="footer-credit">
+        <p data-i18n="footer_credit">قام ببناء وتطوير هذه المنصة: Eng:Abdulrahman</p>
+        <p>📧 <span data-i18n="footer_contact">للتواصل:</span> <a href="mailto:abdulrahmand19@hotmail.com">abdulrahmand19@hotmail.com</a></p>
+        <p>X: <a href="https://x.com/Abdulr3hm33n" target="_blank" rel="noopener noreferrer">@Abdulr3hm33n</a></p>
+        </div>
+      </div>
     </div>
-    <div>
-      <div class="footer-heading" data-i18n="footer_nav">التنقّل</div>
-      <ul class="footer-links">
-        <li><a href="index.html" data-i18n="nav_home">الرئيسية</a></li>
-        <li><a href="models.html" data-i18n="nav_models">النماذج</a></li>
-        <li><a href="hardware.html" data-i18n="nav_hardware">الهاردوير</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-heading" data-i18n="footer_tools">الأدوات</div>
-      <ul class="footer-links">
-        <li><a href="compare.html" data-i18n="nav_compare">مقارنة GPU</a></li>
-        <li><a href="calculator.html" data-i18n="nav_calc">حاسبة</a></li>
-        <li><a href="about.html" data-i18n="nav_about">عن المنصة</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-heading" data-i18n="footer_soon">قريباً</div>
-      <ul class="footer-links">
-        <li><a href="#" data-i18n="footer_store">متجر التجهيزات</a></li>
-        <li><a href="#" data-i18n="footer_api">API مطورين</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© <span id="footerYear">2026</span> AI INFRA.</span>
-    <span class="footer-badge">⚡ Static-First • GitHub Pages</span>
-  </div>
-</footer>
+  </footer>
 
-<script src="assets/js/theme.js"></script>
-<script src="assets/js/i18n.js"></script>
-<script src="assets/js/app.js"></script>
-
-<script src="assets/js/calculator.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/models-data.js"></script>
+  <script src="assets/js/calculator.js"></script>
 </body>
+
 </html>

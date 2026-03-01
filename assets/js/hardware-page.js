@@ -1,11 +1,12 @@
 /**
  * hardware-page.js
- * بناء جدول سريع للهاردوير
+ * بناء جدول سريع للهاردوير + قسم "أي نموذج يناسب كرتّي"
  */
 
 document.addEventListener("DOMContentLoaded", async () => {
     const table = document.getElementById("hwTable");
-    if (!table) return;
+    const gpuSelect = document.getElementById("gpuModelsSelect");
+    const gpuList = document.getElementById("gpuModelsList");
 
     function L(ar, en) {
       try {
@@ -60,4 +61,74 @@ document.addEventListener("DOMContentLoaded", async () => {
         td(g.notes || "-"),
       ]));
     });
+
+    if (gpuSelect && gpuList) {
+      const opt0 = document.createElement("option");
+      opt0.value = "";
+      opt0.textContent = L("اختر الكرت", "Select GPU");
+      gpuSelect.appendChild(opt0);
+      items.forEach((g, idx) => {
+        const opt = document.createElement("option");
+        opt.value = String(idx);
+        opt.textContent = g.name || "-";
+        gpuSelect.appendChild(opt);
+      });
+
+      let models = [];
+      try {
+        models = await ModelsData.loadModels();
+      } catch { /* ignore */ }
+
+      function getReqVram(m) {
+        const v = m.recommendedVramGb ?? m.minVramGb ?? m.vramGb ?? m.vram;
+        if (v === null || v === undefined) return null;
+        const n = Number(v);
+        return Number.isFinite(n) ? n : null;
+      }
+
+      function renderModelsForGpu() {
+        const val = gpuSelect.value;
+        if (val === "") {
+          gpuList.textContent = "";
+          return;
+        }
+        const idx = parseInt(val, 10);
+        const gpu = items[idx];
+        const vramGb = gpu && (gpu.vramGb != null) ? Number(gpu.vramGb) : null;
+        if (!Number.isFinite(vramGb)) {
+          gpuList.textContent = "";
+          return;
+        }
+        while (gpuList.firstChild) gpuList.removeChild(gpuList.firstChild);
+        const suitable = models.filter((m) => {
+          const need = getReqVram(m);
+          if (need === null) return false;
+          return need <= vramGb;
+        });
+        if (suitable.length === 0) {
+          const p = document.createElement("p");
+          p.className = "muted";
+          p.textContent = L("لا توجد نماذج تناسب هذا الكرت في القاعدة.", "No models in the database fit this GPU.");
+          gpuList.appendChild(p);
+          return;
+        }
+        suitable.slice(0, 50).forEach((m) => {
+          const a = document.createElement("a");
+          a.href = "model.html?id=" + encodeURIComponent(String(m.id || ""));
+          a.textContent = m.name || m.id || "";
+          a.style.marginRight = "8px";
+          a.style.marginBottom = "4px";
+          a.style.display = "inline-block";
+          gpuList.appendChild(a);
+        });
+        if (suitable.length > 50) {
+          const more = document.createElement("span");
+          more.className = "muted";
+          more.textContent = " +" + (suitable.length - 50) + " " + (I18N.getSavedLang() === "ar" ? "أخرى" : "more");
+          gpuList.appendChild(more);
+        }
+      }
+
+      gpuSelect.addEventListener("change", renderModelsForGpu);
+    }
   });

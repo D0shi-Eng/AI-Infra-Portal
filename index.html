@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>(function(){var l=localStorage.getItem('lang');if(l==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';}})()</script>
-  <meta name="description" content="AI INFRA — منصة البنية التحتية للذكاء الاصطناعي | استكشف النماذج واحسب المتطلبات وجهّز منصتك">
+  <script>(function () { var l = localStorage.getItem('lang'); if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; } })()</script>
+  <meta name="description"
+    content="AI INFRA — منصة البنية التحتية للذكاء الاصطناعي | استكشف النماذج واحسب المتطلبات وجهّز منصتك">
   <title>AI INFRA — منصة البنية التحتية للذكاء الاصطناعي</title>
 
   <link rel="stylesheet" href="assets/css/base.css">
@@ -13,148 +15,161 @@
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/animations.css">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.152.0/three.min.js" integrity="sha384-X9Z4JPIA98tyn9ayVMe0cM9j3zfE7CliV/xrpqv2t757y/UFj/awObaY8PUT6rh7" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.152.0/three.min.js"
+    integrity="sha384-X9Z4JPIA98tyn9ayVMe0cM9j3zfE7CliV/xrpqv2t757y/UFj/awObaY8PUT6rh7"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
-<header class="navbar">
-  <div class="nav-left">
-    <div class="logo" data-i18n="brand">AI INFRA</div>
-    <nav class="nav-links">
-      <a href="index.html" data-i18n="nav_home"></a>
-      <a href="models.html" data-i18n="nav_models"></a>
-      <a href="hardware.html" data-i18n="nav_hardware"></a>
-      <a href="compare.html" data-i18n="nav_compare"></a>
-      <a href="calculator.html" data-i18n="nav_calc"></a>
-      <a href="about.html" data-i18n="nav_about"></a>
-    </nav>
-  </div>
-  <div class="controls">
-    <button id="langToggle">EN</button>
-    <button id="themeToggle">☀</button>
-  </div>
-</header>
+  <a href="#main" class="skip-link" data-i18n="skip_link">انتقال للمحتوى</a>
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="logo" data-i18n="brand">AI INFRA</div>
+      <nav class="nav-links">
+        <a href="index.html" data-i18n="nav_home"></a>
+        <a href="models.html" data-i18n="nav_models"></a>
+        <a href="hardware.html" data-i18n="nav_hardware"></a>
+        <a href="compare.html" data-i18n="nav_compare"></a>
+        <a href="calculator.html" data-i18n="nav_calc"></a>
+        <a href="lessons.html" data-i18n="nav_lessons"></a>
+        <a href="recommendations.html" data-i18n="nav_recommendations"></a>
+        <a href="ask.html" data-i18n="nav_ask"></a>
+        <a href="about.html" data-i18n="nav_about"></a>
+      </nav>
+    </div>
+    <div class="controls">
+      <button id="langToggle" type="button" aria-label="تبديل اللغة">EN</button>
+      <button id="themeToggle" type="button" aria-label="تبديل الوضع الليلي">☀</button>
+    </div>
+  </header>
 
-<!-- ═══ Hero ═══ -->
-<section class="hero">
-  <canvas id="bg3d"></canvas>
-  <div class="hero-content">
-    <h1 data-i18n="title"></h1>
-    <p data-i18n="subtitle"></p>
-    <div class="hero-buttons">
-      <a href="models.html" class="cta-btn" data-i18n="quick_models"></a>
-      <a href="calculator.html" class="cta-btn cta-btn--outline" data-i18n="quick_calc"></a>
-      <a href="compare.html" class="cta-btn cta-btn--outline" data-i18n="quick_compare"></a>
+  <!-- ═══ Hero ═══ -->
+  <section id="main" class="hero">
+    <canvas id="bg3d"></canvas>
+    <div class="hero-content">
+      <h1 data-i18n="title"></h1>
+      <p data-i18n="subtitle"></p>
+      <div class="hero-buttons">
+        <a href="models.html" class="cta-btn" data-i18n="quick_models"></a>
+        <a href="calculator.html" class="cta-btn cta-btn--outline" data-i18n="quick_calc"></a>
+        <a href="compare.html" class="cta-btn cta-btn--outline" data-i18n="quick_compare"></a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══ Stats ═══ -->
-<section class="stats-section reveal">
-  <div class="stats-grid">
-    <div class="stat-card">
-      <span class="stat-icon">🧠</span>
-      <span class="stat-number" id="statModels">209+</span>
-      <span class="stat-label" data-i18n="stat_models">نماذج ذكاء اصطناعي</span>
+  <!-- ═══ Stats ═══ -->
+  <section class="stats-section reveal">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-icon">🧠</span>
+        <span class="stat-number" id="statModels">209+</span>
+        <span class="stat-label" data-i18n="stat_models">نماذج ذكاء اصطناعي</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">🎮</span>
+        <span class="stat-number" id="statGpus">7+</span>
+        <span class="stat-label" data-i18n="stat_gpus">كرت شاشة</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">📊</span>
+        <span class="stat-number">5</span>
+        <span class="stat-label" data-i18n="stat_quant">مستويات كوانتايز</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-icon">🌐</span>
+        <span class="stat-number">2</span>
+        <span class="stat-label" data-i18n="stat_langs">لغة مدعومة</span>
+      </div>
     </div>
-    <div class="stat-card">
-      <span class="stat-icon">🎮</span>
-      <span class="stat-number" id="statGpus">7+</span>
-      <span class="stat-label" data-i18n="stat_gpus">كرت شاشة</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-icon">📊</span>
-      <span class="stat-number">5</span>
-      <span class="stat-label" data-i18n="stat_quant">مستويات كوانتايز</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-icon">🌐</span>
-      <span class="stat-number">2</span>
-      <span class="stat-label" data-i18n="stat_langs">لغة مدعومة</span>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══ Features ═══ -->
-<section class="features-section">
-  <h2 class="section-title reveal" data-i18n="features_title">ماذا نقدّم لك؟</h2>
-  <p class="section-subtitle reveal" data-i18n="features_subtitle">أدوات عملية تختصر وقتك وتساعدك تختار صح</p>
+  <!-- ═══ Features ═══ -->
+  <section class="features-section">
+    <h2 class="section-title reveal" data-i18n="features_title">ماذا نقدّم لك؟</h2>
+    <p class="section-subtitle reveal" data-i18n="features_subtitle">أدوات عملية تختصر وقتك وتساعدك تختار صح</p>
 
-  <div class="features-grid reveal-stagger">
-    <div class="feature-card">
-      <span class="feature-icon">📚</span>
-      <div class="feature-title" data-i18n="feat_models_title">دليل النماذج</div>
-      <p class="feature-desc" data-i18n="feat_models_desc">استعرض النماذج مع متطلبات التشغيل والفلاتر الذكية</p>
+    <div class="features-grid reveal-stagger">
+      <div class="feature-card">
+        <span class="feature-icon">📚</span>
+        <div class="feature-title" data-i18n="feat_models_title">دليل النماذج</div>
+        <p class="feature-desc" data-i18n="feat_models_desc">استعرض النماذج مع متطلبات التشغيل والفلاتر الذكية</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">⚡</span>
+        <div class="feature-title" data-i18n="feat_calc_title">حاسبة المتطلبات</div>
+        <p class="feature-desc" data-i18n="feat_calc_desc">قدّر VRAM و RAM بناءً على حجم النموذج والكوانتايز</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🔍</span>
+        <div class="feature-title" data-i18n="feat_compare_title">مقارنة GPU</div>
+        <p class="feature-desc" data-i18n="feat_compare_desc">قارن كروت الشاشة واعرف الأنسب لتشغيل النماذج محلياً</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🖥️</span>
+        <div class="feature-title" data-i18n="feat_hw_title">إرشادات التجميع</div>
+        <p class="feature-desc" data-i18n="feat_hw_desc">توصيات عملية لبناء جهاز حسب حجم النموذج</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🌙</span>
+        <div class="feature-title" data-i18n="feat_theme_title">وضع ليلي/نهاري</div>
+        <p class="feature-desc" data-i18n="feat_theme_desc">تصميم احترافي يتكيّف مع تفضيلاتك البصرية</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🚀</span>
+        <div class="feature-title" data-i18n="feat_future_title">قابل للتوسع</div>
+        <p class="feature-desc" data-i18n="feat_future_desc">بنية جاهزة لمتجر تجهيزات AI ولوحة إدارة مستقبلية</p>
+      </div>
     </div>
-    <div class="feature-card">
-      <span class="feature-icon">⚡</span>
-      <div class="feature-title" data-i18n="feat_calc_title">حاسبة المتطلبات</div>
-      <p class="feature-desc" data-i18n="feat_calc_desc">قدّر VRAM و RAM بناءً على حجم النموذج والكوانتايز</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">🔍</span>
-      <div class="feature-title" data-i18n="feat_compare_title">مقارنة GPU</div>
-      <p class="feature-desc" data-i18n="feat_compare_desc">قارن كروت الشاشة واعرف الأنسب لتشغيل النماذج محلياً</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">🖥️</span>
-      <div class="feature-title" data-i18n="feat_hw_title">إرشادات التجميع</div>
-      <p class="feature-desc" data-i18n="feat_hw_desc">توصيات عملية لبناء جهاز حسب حجم النموذج</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">🌙</span>
-      <div class="feature-title" data-i18n="feat_theme_title">وضع ليلي/نهاري</div>
-      <p class="feature-desc" data-i18n="feat_theme_desc">تصميم احترافي يتكيّف مع تفضيلاتك البصرية</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon">🚀</span>
-      <div class="feature-title" data-i18n="feat_future_title">قابل للتوسع</div>
-      <p class="feature-desc" data-i18n="feat_future_desc">بنية جاهزة لمتجر تجهيزات AI ولوحة إدارة مستقبلية</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══ Footer ═══ -->
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">AI INFRA</div>
-      <p class="footer-desc" data-i18n="footer_desc">منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء الاصطناعي وربطها بالبنية التحتية المناسبة.</p>
+  <!-- ═══ Footer ═══ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">AI INFRA</div>
+        <p class="footer-desc" data-i18n="footer_desc">منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء الاصطناعي
+          وربطها بالبنية التحتية المناسبة.</p>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_nav">التنقّل</div>
+        <ul class="footer-links">
+          <li><a href="index.html" data-i18n="nav_home">الرئيسية</a></li>
+          <li><a href="models.html" data-i18n="nav_models">النماذج</a></li>
+          <li><a href="hardware.html" data-i18n="nav_hardware">الهاردوير</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_tools">الأدوات</div>
+        <ul class="footer-links">
+          <li><a href="compare.html" data-i18n="nav_compare">مقارنة GPU</a></li>
+          <li><a href="calculator.html" data-i18n="nav_calc">حاسبة</a></li>
+          <li><a href="about.html" data-i18n="nav_about">عن المنصة</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_soon">قريباً</div>
+        <ul class="footer-links">
+          <li><a href="https://github.com/D0shi-Eng/AI-Infra-Portal/discussions" target="_blank" rel="noopener noreferrer" data-i18n="footer_community">المجتمع</a></li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <div class="footer-heading" data-i18n="footer_nav">التنقّل</div>
-      <ul class="footer-links">
-        <li><a href="index.html" data-i18n="nav_home">الرئيسية</a></li>
-        <li><a href="models.html" data-i18n="nav_models">النماذج</a></li>
-        <li><a href="hardware.html" data-i18n="nav_hardware">الهاردوير</a></li>
-      </ul>
+    <div class="footer-bottom">
+      <span class="footer-copy">© <span id="footerYear">2026</span> AI INFRA. <span data-i18n="footer_updated">آخر تحديث: الأحد 1 مارس 2026</span></span>
+      <div class="footer-badge-group">
+        <span class="footer-badge">⚡ Static-First • GitHub Pages</span>
+        <div class="footer-credit">
+        <p data-i18n="footer_credit">قام ببناء وتطوير هذه المنصة: Eng:Abdulrahman</p>
+        <p>📧 <span data-i18n="footer_contact">للتواصل:</span> <a href="mailto:abdulrahmand19@hotmail.com">abdulrahmand19@hotmail.com</a></p>
+        <p>X: <a href="https://x.com/Abdulr3hm33n" target="_blank" rel="noopener noreferrer">@Abdulr3hm33n</a></p>
+        </div>
+      </div>
     </div>
-    <div>
-      <div class="footer-heading" data-i18n="footer_tools">الأدوات</div>
-      <ul class="footer-links">
-        <li><a href="compare.html" data-i18n="nav_compare">مقارنة GPU</a></li>
-        <li><a href="calculator.html" data-i18n="nav_calc">حاسبة</a></li>
-        <li><a href="about.html" data-i18n="nav_about">عن المنصة</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-heading" data-i18n="footer_soon">قريباً</div>
-      <ul class="footer-links">
-        <li><a href="#" data-i18n="footer_store">متجر التجهيزات</a></li>
-        <li><a href="#" data-i18n="footer_api">API مطورين</a></li>
-        <li><a href="#" data-i18n="footer_community">المجتمع</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© <span id="footerYear">2026</span> AI INFRA. <span data-i18n="footer_rights">جميع الحقوق محفوظة.</span></span>
-    <span class="footer-badge">⚡ Static-First • GitHub Pages</span>
-  </div>
-</footer>
+  </footer>
 
-<script src="assets/js/theme.js"></script>
-<script src="assets/js/i18n.js"></script>
-<script src="assets/js/three-init.js"></script>
-<script src="assets/js/app.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/three-init.js"></script>
+  <script src="assets/js/app.js"></script>
 </body>
+
 </html>

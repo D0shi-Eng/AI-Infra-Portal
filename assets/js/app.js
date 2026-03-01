@@ -18,6 +18,52 @@ document.addEventListener("DOMContentLoaded", () => {
     I18N.init();
   }
 
+  // A11y: aria-label لأزرار اللغة والثيم
+  const langBtn = document.getElementById("langToggle");
+  const themeBtn = document.getElementById("themeToggle");
+  if (langBtn && typeof I18N !== "undefined" && I18N.t) {
+    langBtn.setAttribute("aria-label", I18N.t("aria_label_lang"));
+  }
+  if (themeBtn && typeof I18N !== "undefined" && I18N.t) {
+    themeBtn.setAttribute("aria-label", I18N.t("aria_label_theme"));
+  }
+
+  // Skip link للمحتوى (يُظهر عند التركيز فقط)
+  if (!document.querySelector(".skip-link")) {
+    const skip = document.createElement("a");
+    skip.href = "#main";
+    skip.className = "skip-link";
+    skip.textContent = (typeof I18N !== "undefined" && I18N.t ? I18N.t("skip_link") : "انتقال للمحتوى");
+    document.body.insertBefore(skip, document.body.firstChild);
+  }
+
+  // همبرغر موبايل: زر لفتح/إغلاق القائمة
+  const navbar = document.querySelector(".navbar");
+  const navLinks = document.querySelector(".nav-links");
+  if (navbar && navLinks) {
+    let menuBtn = document.getElementById("navMenuBtn");
+    if (!menuBtn) {
+      menuBtn = document.createElement("button");
+      menuBtn.id = "navMenuBtn";
+      menuBtn.type = "button";
+      menuBtn.className = "nav-menu-btn";
+      menuBtn.setAttribute("aria-label", (typeof I18N !== "undefined" && I18N.t ? I18N.t("aria_label_menu") : "فتح القائمة"));
+      menuBtn.setAttribute("aria-expanded", "false");
+      menuBtn.textContent = "☰";
+      navbar.querySelector(".nav-left").appendChild(menuBtn);
+    }
+    menuBtn.addEventListener("click", () => {
+      const open = navbar.classList.toggle("nav-open");
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    document.addEventListener("click", (e) => {
+      if (navbar.classList.contains("nav-open") && !navbar.contains(e.target)) {
+        navbar.classList.remove("nav-open");
+        menuBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
   // Active nav link
   const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
   document.querySelectorAll(".nav-links a").forEach((a) => {
@@ -26,15 +72,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ─── Navbar scroll effect ───
-  const navbar = document.querySelector(".navbar");
-  if (navbar) {
+  const navbarScroll = document.querySelector(".navbar");
+  if (navbarScroll) {
     let lastScroll = 0;
     window.addEventListener("scroll", () => {
       const y = window.scrollY;
       if (y > 60) {
-        navbar.classList.add("scrolled");
+        navbarScroll.classList.add("scrolled");
       } else {
-        navbar.classList.remove("scrolled");
+        navbarScroll.classList.remove("scrolled");
       }
       lastScroll = y;
     }, { passive: true });

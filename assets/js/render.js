@@ -247,24 +247,29 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     card.appendChild(badges);
 
+    const goToDetails = () => {
+      const id = model && (model.id !== undefined && model.id !== null) ? String(model.id).trim() : "";
+      if (id && typeof Router !== "undefined" && Router.toModelDetails) Router.toModelDetails(id);
+    };
+
     // ─ Details Button
     const btn = document.createElement("button");
     btn.className = "card-details-btn";
     btn.textContent = I18N.getSavedLang() === "ar" ? "عرض التفاصيل" : "View Details";
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
-      Router.toModelDetails(model.id);
+      goToDetails();
     });
     card.appendChild(btn);
 
     // ─ Card click
     card.addEventListener("click", (e) => {
       if (e.target === btn) return;
-      Router.toModelDetails(model.id);
+      goToDetails();
     });
 
     card.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") Router.toModelDetails(model.id);
+      if (e.key === "Enter") goToDetails();
     });
 
     return card;

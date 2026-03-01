@@ -2,6 +2,24 @@
    layout.css — الهيكل العام: Navbar, Hero, Footer, Container
    ═══════════════════════════════════════════════════════════════ */
 
+/* ─── Skip link (A11y) ─── */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 9999;
+  padding: 10px 16px;
+  background: var(--neon);
+  color: #0a0a12;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 12px;
+}
+
 /* ─── Navbar ─── */
 .navbar {
   position: fixed;
@@ -399,8 +417,12 @@
 }
 
 .footer-copy {
-  opacity: 0.5;
   font-size: 0.82rem;
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.9;
 }
 
 .footer-badge {
@@ -410,9 +432,90 @@
   padding: 6px 14px;
   border-radius: var(--radius-full);
   background: rgba(0, 245, 255, 0.06);
-  border: 1px solid rgba(0, 245, 255, 0.12);
+  border: 1px solid rgba(0, 245, 255, 0.2);
   font-size: 0.78rem;
-  opacity: 0.7;
+  opacity: 0.95;
+  color: var(--neon);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), 0 0 20px rgba(0, 245, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.footer-badge-group {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  width: max-content;
+  min-width: 0;
+  direction: ltr;
+}
+
+.footer-badge-group .footer-badge {
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+/* ─── footer-credit: ثلاثة صناديق نفس المحاذاة فوق بعض، نفس عرض الشارة ─── */
+.footer-credit {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer-credit p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 6px 14px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: var(--radius-full);
+  background: rgba(0, 245, 255, 0.06);
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--neon);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35), 0 0 20px rgba(0, 245, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.footer-credit a {
+  color: var(--neon);
+  text-decoration: none;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.footer-credit a:hover {
+  text-decoration: underline;
+}
+
+[data-theme="light"] .footer-credit p {
+  background: rgba(157, 0, 255, 0.06);
+  border-color: rgba(157, 0, 255, 0.2);
+  color: var(--purple);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15), 0 0 20px rgba(157, 0, 255, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="light"] .footer-credit a {
+  color: var(--purple);
+}
+
+[data-theme="light"] .footer-copy {
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .footer-badge {
+  color: var(--purple);
+  background: rgba(157, 0, 255, 0.06);
+  border-color: rgba(157, 0, 255, 0.2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15), 0 0 20px rgba(157, 0, 255, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 /* ─── Responsive ─── */
@@ -422,9 +525,44 @@
   .footer-inner { grid-template-columns: 1fr 1fr; }
 }
 
+.nav-menu-btn {
+  display: none;
+  padding: 8px 12px;
+  font-size: 1.2rem;
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  background: rgba(0, 245, 255, 0.08);
+  color: var(--neon);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+[data-theme="light"] .nav-menu-btn {
+  border-color: rgba(157, 0, 255, 0.2);
+  background: rgba(157, 0, 255, 0.06);
+  color: var(--purple);
+}
+
 @media (max-width: 640px) {
   .navbar { padding: 10px 14px; }
-  .nav-links { display: none; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(5, 5, 16, 0.98);
+    border-bottom: 1px solid rgba(0, 245, 255, 0.15);
+    padding: 12px;
+    gap: 4px;
+  }
+  [data-theme="light"] .nav-links {
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom-color: rgba(157, 0, 255, 0.12);
+  }
+  .navbar.nav-open .nav-links {
+    display: flex;
+  }
+  .nav-menu-btn { display: block; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .stats-section { margin-top: -40px; }
   .features-grid { grid-template-columns: 1fr; }

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <script>(function(){var l=localStorage.getItem('lang');if(l==='en'){document.documentElement.lang='en';document.documentElement.dir='ltr';}})()</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>(function () { var l = localStorage.getItem('lang'); if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; } })()</script>
   <title>About • AI INFRA</title>
 
   <link rel="stylesheet" href="assets/css/base.css">
@@ -14,87 +15,101 @@
 </head>
 
 <body>
-<header class="navbar">
-  <div class="nav-left">
-    <div class="logo" data-i18n="brand">AI INFRA</div>
-    <nav class="nav-links">
-      <a href="index.html" data-i18n="nav_home"></a>
-      <a href="models.html" data-i18n="nav_models"></a>
-      <a href="hardware.html" data-i18n="nav_hardware"></a>
-      <a href="compare.html" data-i18n="nav_compare"></a>
-      <a href="calculator.html" data-i18n="nav_calc"></a>
-      <a href="about.html" data-i18n="nav_about"></a>
-    </nav>
-  </div>
-  <div class="controls">
-    <button id="langToggle">EN</button>
-    <button id="themeToggle">☀</button>
-  </div>
-</header>
+  <a href="#main" class="skip-link" data-i18n="skip_link">انتقال للمحتوى</a>
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="logo" data-i18n="brand">AI INFRA</div>
+      <nav class="nav-links">
+        <a href="index.html" data-i18n="nav_home"></a>
+        <a href="models.html" data-i18n="nav_models"></a>
+        <a href="hardware.html" data-i18n="nav_hardware"></a>
+        <a href="compare.html" data-i18n="nav_compare"></a>
+        <a href="calculator.html" data-i18n="nav_calc"></a>
+        <a href="lessons.html" data-i18n="nav_lessons"></a>
+        <a href="recommendations.html" data-i18n="nav_recommendations"></a>
+        <a href="ask.html" data-i18n="nav_ask"></a>
+        <a href="about.html" data-i18n="nav_about"></a>
+      </nav>
+    </div>
+    <div class="controls">
+      <button id="langToggle" type="button" aria-label="تبديل اللغة">EN</button>
+      <button id="themeToggle" type="button" aria-label="تبديل الوضع الليلي">☀</button>
+    </div>
+  </header>
 
-<main class="container">
-  <h1 class="page-title" data-i18n="about_title">عن المنصة</h1>
-  <p class="page-subtitle" data-i18n="about_subtitle">بوابة تقنية لتبسيط اختيار النموذج والهاردوير — قابلة للتوسع</p>
+  <main id="main" class="container">
+    <h1 class="page-title" data-i18n="about_title">عن المنصة</h1>
+    <p class="page-subtitle" data-i18n="about_subtitle">بوابة تقنية لتبسيط اختيار النموذج والهاردوير — قابلة للتوسع</p>
 
-  <section class="grid" style="grid-template-columns: 1fr;">
+    <section class="grid" style="grid-template-columns: 1fr;">
+      <article class="neon-card">
+        <div class="card-title" data-i18n="about_benefits_title">فوائد المنصة</div>
+        <p class="muted" style="margin-top:10px; line-height:1.8;">
+          <span data-i18n="about_benefits_1">تساعدك تختار النموذج المناسب حسب جهازك وميزانيتك.</span><br>
+          <span data-i18n="about_benefits_2">توضح متطلبات التشغيل بشكل عملي (VRAM/RAM) بدون تعقيد.</span><br>
+          <span data-i18n="about_benefits_3">تختصر وقت التجارب العشوائية وتقلل الهدر في الموارد.</span><br>
+          <span data-i18n="about_benefits_4">تقارن بين الـ GPUs لتحديد الخيار الأنسب لتشغيل النماذج محلياً.</span><br>
+          <span data-i18n="about_benefits_5">حاسبة تقديرية لمتطلبات التشغيل حسب حجم النموذج وطريقة الضغط.</span>
+        </p>
+      </article>
+    </section>
+
+    <div class="hr"></div>
+
     <article class="neon-card">
-      <div class="card-title" data-i18n="about_benefits_title">فوائد المنصة</div>
-      <p class="muted" style="margin-top:10px; line-height:1.8;">
-        <span data-i18n="about_benefits_1">تساعدك تختار النموذج المناسب حسب جهازك وميزانيتك.</span><br>
-        <span data-i18n="about_benefits_2">توضح متطلبات التشغيل بشكل عملي (VRAM/RAM) بدون تعقيد.</span><br>
-        <span data-i18n="about_benefits_3">تختصر وقت التجارب العشوائية وتقلل الهدر في الموارد.</span><br>
-        <span data-i18n="about_benefits_4">تقارن بين الـ GPUs لتحديد الخيار الأنسب لتشغيل النماذج محلياً.</span><br>
-        <span data-i18n="about_benefits_5">حاسبة تقديرية لمتطلبات التشغيل حسب حجم النموذج وطريقة الضغط.</span>
-      </p>
+      <div class="card-title" data-i18n="about_message_title">رسالة للمستخدم</div>
+      <p class="muted" style="margin-top:10px; line-height:1.8;" data-i18n="about_message_text">هذه المنصة صُممت لتكون
+        مرجعًا عمليًا لاختيار النماذج والعتاد بثقة. حالياً نقدم الأدوات مجاناً وبأداء عالي على GitHub Pages. مستقبلاً
+        سنوسّع المحتوى ونضيف توصيات أعمق، وعند توفر مخزون فعلي قد نطلق متجرًا مخصصًا لتجهيزات الذكاء الاصطناعي.</p>
     </article>
-  </section>
+  </main>
 
-  <div class="hr"></div>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">AI INFRA</div>
+        <p class="footer-desc" data-i18n="footer_desc">منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء
+          الاصطناعي.</p>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_nav">التنقّل</div>
+        <ul class="footer-links">
+          <li><a href="index.html" data-i18n="nav_home">الرئيسية</a></li>
+          <li><a href="models.html" data-i18n="nav_models">النماذج</a></li>
+          <li><a href="hardware.html" data-i18n="nav_hardware">الهاردوير</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_tools">الأدوات</div>
+        <ul class="footer-links">
+          <li><a href="compare.html" data-i18n="nav_compare">مقارنة GPU</a></li>
+          <li><a href="calculator.html" data-i18n="nav_calc">حاسبة</a></li>
+          <li><a href="about.html" data-i18n="nav_about">عن المنصة</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_soon">قريباً</div>
+        <ul class="footer-links">
+          <li><a href="https://github.com/D0shi-Eng/AI-Infra-Portal/discussions" target="_blank" rel="noopener noreferrer" data-i18n="footer_community">المجتمع</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© <span id="footerYear">2026</span> AI INFRA. <span data-i18n="footer_updated">آخر تحديث: الأحد 1 مارس 2026</span></span>
+      <div class="footer-badge-group">
+        <span class="footer-badge">⚡ Static-First • GitHub Pages</span>
+        <div class="footer-credit">
+        <p data-i18n="footer_credit">قام ببناء وتطوير هذه المنصة: Eng:Abdulrahman</p>
+        <p>📧 <span data-i18n="footer_contact">للتواصل:</span> <a href="mailto:abdulrahmand19@hotmail.com">abdulrahmand19@hotmail.com</a></p>
+        <p>X: <a href="https://x.com/Abdulr3hm33n" target="_blank" rel="noopener noreferrer">@Abdulr3hm33n</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-  <article class="neon-card">
-    <div class="card-title" data-i18n="about_message_title">رسالة للمستخدم</div>
-    <p class="muted" style="margin-top:10px; line-height:1.8;" data-i18n="about_message_text">هذه المنصة صُممت لتكون مرجعًا عمليًا لاختيار النماذج والعتاد بثقة. حالياً نقدم الأدوات مجاناً وبأداء عالي على GitHub Pages. مستقبلاً سنوسّع المحتوى ونضيف توصيات أعمق، وعند توفر مخزون فعلي قد نطلق متجرًا مخصصًا لتجهيزات الذكاء الاصطناعي.</p>
-  </article>
-</main>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div>
-      <div class="footer-brand">AI INFRA</div>
-      <p class="footer-desc" data-i18n="footer_desc">منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء الاصطناعي.</p>
-    </div>
-    <div>
-      <div class="footer-heading" data-i18n="footer_nav">التنقّل</div>
-      <ul class="footer-links">
-        <li><a href="index.html" data-i18n="nav_home">الرئيسية</a></li>
-        <li><a href="models.html" data-i18n="nav_models">النماذج</a></li>
-        <li><a href="hardware.html" data-i18n="nav_hardware">الهاردوير</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-heading" data-i18n="footer_tools">الأدوات</div>
-      <ul class="footer-links">
-        <li><a href="compare.html" data-i18n="nav_compare">مقارنة GPU</a></li>
-        <li><a href="calculator.html" data-i18n="nav_calc">حاسبة</a></li>
-        <li><a href="about.html" data-i18n="nav_about">عن المنصة</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-heading" data-i18n="footer_soon">قريباً</div>
-      <ul class="footer-links">
-        <li><a href="#" data-i18n="footer_store">متجر التجهيزات</a></li>
-        <li><a href="#" data-i18n="footer_api">API مطورين</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© <span id="footerYear">2026</span> AI INFRA.</span>
-    <span class="footer-badge">⚡ Static-First • GitHub Pages</span>
-  </div>
-</footer>
-
-<script src="assets/js/theme.js"></script>
-<script src="assets/js/i18n.js"></script>
-<script src="assets/js/app.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/app.js"></script>
 </body>
+
 </html>

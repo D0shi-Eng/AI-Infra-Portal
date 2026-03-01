@@ -3,12 +3,13 @@
  * حاسبة VRAM/RAM محسّنة مع عرض بصري (أشرطة تقدم)
  */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const paramsB = document.getElementById("paramsB");
   const quant = document.getElementById("quant");
   const contextK = document.getElementById("contextK");
   const btn = document.getElementById("calcBtn");
   const out = document.getElementById("calcOut");
+  const modelSelect = document.getElementById("modelSelectCalc");
 
   const bytesPerParam = {
     fp16: 2.0,
@@ -151,6 +152,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gpuHint.textContent = rec;
     out.appendChild(gpuHint);
+  }
+
+  if (modelSelect) {
+    const opt0 = document.createElement("option");
+    opt0.value = "";
+    opt0.textContent = typeof I18N !== "undefined" && I18N.t ? I18N.t("calc_select_model_none") : "— بدون نموذج —";
+    modelSelect.appendChild(opt0);
+    try {
+      const models = await ModelsData.loadModels();
+      (models || []).forEach((m) => {
+        const opt = document.createElement("option");
+        opt.value = m.id || "";
+        opt.textContent = m.name || m.id || "";
+        modelSelect.appendChild(opt);
+      });
+      modelSelect.addEventListener("change", () => {
+        const id = modelSelect.value;
+        if (!id) return;
+        const model = models.find((x) => String(x.id || "") === id);
+        if (!model) return;
+        if (model.paramsB != null && paramsB) paramsB.value = String(model.paramsB);
+        if (model.contextK != null && contextK) contextK.value = String(model.contextK);
+        calc();
+      });
+    } catch (_) { /* النماذج اختيارية */ }
   }
 
   btn.addEventListener("click", calc);
