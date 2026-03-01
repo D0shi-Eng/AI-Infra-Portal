@@ -216,12 +216,23 @@ const I18N = (() => {
       auth_network_error: "خطأ في الاتصال",
 
       // ─── Nav — التنقل ───
+      nav_guide: "المرشد",
       nav_learn: "تعلّم AI",
       nav_forum: "المنتدى",
       nav_pricing: "الاشتراك",
 
       // ─── Footer — التذييل ───
       footer_premium: "المميز",
+
+      // ─── Guide — مرشد اختيار النموذج ───
+      guide_title: "🧭 مرشد اختيار النموذج",
+      guide_subtitle: "أجب على 4 أسئلة بسيطة وبنرشّح لك أفضل النماذج اللي تناسب احتياجاتك",
+      guide_quick_title: "⚡ اختصارات سريعة",
+      guide_quick_desc: "اضغط على السيناريو اللي يشبه حالتك واحصل على توصيات فورية",
+      guide_wizard_title: "🎯 المرشد التفاعلي",
+      guide_wizard_desc: "خلنا نساعدك تلاقي النموذج المثالي — أجب على الأسئلة التالية",
+      guide_tips_title: "💡 نصائح ومفاهيم أساسية",
+      guide_tips_desc: "معلومات مهمة تساعدك تفهم الفرق بين النماذج وتختار بذكاء",
 
       // ─── Learn — صفحة التعلّم ───
       learn_title: "تعلّم الذكاء الاصطناعي",
@@ -532,12 +543,23 @@ const I18N = (() => {
       auth_network_error: "Network error",
 
       // ─── Nav ───
+      nav_guide: "Guide",
       nav_learn: "Learn AI",
       nav_forum: "Forum",
       nav_pricing: "Pricing",
 
       // ─── Footer ───
       footer_premium: "Premium",
+
+      // ─── Guide ───
+      guide_title: "🧭 Model Finder Guide",
+      guide_subtitle: "Answer 4 simple questions and we'll recommend the best models for you",
+      guide_quick_title: "⚡ Quick Shortcuts",
+      guide_quick_desc: "Click on a scenario that matches your situation and get instant recommendations",
+      guide_wizard_title: "🎯 Interactive Guide",
+      guide_wizard_desc: "Let us help you find the perfect model — answer the following questions",
+      guide_tips_title: "💡 Tips & Key Concepts",
+      guide_tips_desc: "Important info to help you understand the differences between models and choose wisely",
 
       // ─── Learn ───
       learn_title: "Learn Artificial Intelligence",

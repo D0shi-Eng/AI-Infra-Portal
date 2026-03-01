@@ -1994,6 +1994,607 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   Guide Page — مرشد اختيار النموذج
+   ═══════════════════════════════════════════════════════════════ */
+
+.guide-hero {
+  text-align: center;
+  padding: 2rem 0 1rem;
+}
+
+.guide-section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.section-desc {
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* ─── سيناريوهات سريعة ─── */
+.quick-scenarios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.scenario-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text);
+  text-align: start;
+  width: 100%;
+}
+
+.scenario-card:hover {
+  border-color: var(--neon);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 200, 255, 0.15);
+}
+
+.scenario-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.scenario-text {
+  flex: 1;
+  font-weight: 600;
+}
+
+.scenario-arrow {
+  font-size: 1.2rem;
+  color: var(--neon);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.scenario-card:hover .scenario-arrow {
+  opacity: 1;
+  transform: translateX(-4px);
+}
+
+[dir="ltr"] .scenario-card:hover .scenario-arrow {
+  transform: translateX(4px);
+}
+
+/* ─── الويزارد ─── */
+.wizard-container {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border: 2px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  min-height: 400px;
+}
+
+/* شريط التقدم */
+.wizard-progress {
+  margin-bottom: 2rem;
+}
+
+.wizard-progress-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.wizard-progress-fill {
+  height: 100%;
+  background: var(--gradient-neon);
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wizard-steps-indicator {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.wizard-step-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.dot-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: var(--surface);
+  color: var(--muted);
+  border: 2px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.wizard-step-dot.active .dot-number {
+  background: var(--gradient-neon);
+  color: #fff;
+  border-color: var(--neon);
+  box-shadow: 0 0 16px rgba(0, 200, 255, 0.4);
+}
+
+.wizard-step-dot.completed .dot-number {
+  background: #22c55e;
+  color: #fff;
+  border-color: #22c55e;
+}
+
+.dot-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 600;
+  text-align: center;
+}
+
+.wizard-step-dot.active .dot-label {
+  color: var(--neon);
+}
+
+/* أسئلة الويزارد */
+.wizard-question {
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.wizard-hint {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+/* شبكة الخيارات (cards) */
+.wizard-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.wizard-options-3col {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.wizard-option-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 1rem;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--glass-border);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  color: var(--text);
+}
+
+.wizard-option-card:hover {
+  border-color: var(--neon);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 200, 255, 0.1);
+}
+
+.wizard-option-card.selected {
+  border-color: var(--neon);
+  background: linear-gradient(135deg, rgba(0, 200, 255, 0.08), rgba(139, 92, 246, 0.08));
+  box-shadow: 0 0 20px rgba(0, 200, 255, 0.2);
+}
+
+.wizard-option-card .option-icon {
+  font-size: 2.2rem;
+}
+
+.wizard-option-card .option-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* قائمة الخيارات (rows) */
+.wizard-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.wizard-option-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--glass-border);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  color: var(--text);
+  text-align: start;
+  width: 100%;
+}
+
+.wizard-option-row:hover {
+  border-color: var(--neon);
+  transform: translateX(4px);
+}
+
+[dir="rtl"] .wizard-option-row:hover {
+  transform: translateX(-4px);
+}
+
+.wizard-option-row.selected {
+  border-color: var(--neon);
+  background: linear-gradient(135deg, rgba(0, 200, 255, 0.08), rgba(139, 92, 246, 0.08));
+}
+
+.wizard-option-row .option-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.wizard-option-row .option-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.wizard-option-row .option-label {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.wizard-option-row .option-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.wizard-option-row .option-check {
+  font-size: 1.2rem;
+  color: var(--neon);
+  font-weight: 800;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* ─── النتائج ─── */
+.wizard-results {
+  padding: 1rem 0;
+}
+
+.results-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.results-header h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.results-header p {
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.wizard-restart-btn {
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--neon);
+  background: transparent;
+  color: var(--neon);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+
+.wizard-restart-btn:hover {
+  background: var(--neon);
+  color: #fff;
+}
+
+/* المنصة (Top 3) */
+.results-podium {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.result-card {
+  background: var(--surface);
+  border: 2px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  position: relative;
+  animation: slideUp 0.5s ease both;
+  transition: all 0.3s;
+}
+
+.result-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 200, 255, 0.12);
+  border-color: var(--neon);
+}
+
+.result-card.podium-card {
+  border-color: rgba(0, 200, 255, 0.3);
+  background: linear-gradient(135deg, var(--surface), rgba(0, 200, 255, 0.04));
+}
+
+.result-card[data-rank="1"] {
+  border-color: #fbbf24;
+  box-shadow: 0 0 24px rgba(251, 191, 36, 0.15);
+}
+
+.result-medal {
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+[dir="ltr"] .result-medal {
+  right: auto;
+  left: -8px;
+}
+
+/* حلقة النسبة */
+.result-score-ring {
+  width: 80px;
+  height: 80px;
+  position: relative;
+}
+
+.result-score-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.result-score-ring.score-high { --ring-color: #22c55e; --ring-bg: rgba(34, 197, 94, 0.15); }
+.result-score-ring.score-mid  { --ring-color: #f59e0b; --ring-bg: rgba(245, 158, 11, 0.15); }
+.result-score-ring.score-low  { --ring-color: #ef4444; --ring-bg: rgba(239, 68, 68, 0.15); }
+
+.score-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.result-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.result-provider {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.result-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.result-badges .badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.badge-type { background: rgba(0, 200, 255, 0.12); color: var(--neon); }
+.badge-open { background: rgba(34, 197, 94, 0.12); color: #22c55e; }
+.badge-closed { background: rgba(239, 68, 68, 0.12); color: #ef4444; }
+.badge-params { background: rgba(139, 92, 246, 0.12); color: #8b5cf6; }
+.badge-ctx { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+
+.result-notes {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.result-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--radius-md);
+  background: var(--gradient-neon);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.result-link:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(0, 200, 255, 0.3);
+}
+
+.results-more-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.results-grid .result-card {
+  padding: 1.25rem;
+}
+
+.results-grid .result-score-ring {
+  width: 60px;
+  height: 60px;
+}
+
+.results-grid .score-text {
+  font-size: 0.9rem;
+}
+
+/* ملخص الاختيارات */
+.results-summary {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  text-align: center;
+}
+
+.results-summary h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.summary-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.summary-tag {
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(0, 200, 255, 0.1), rgba(139, 92, 246, 0.1));
+  border: 1px solid var(--glass-border);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ─── نصائح ─── */
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.tip-card {
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s;
+}
+
+.tip-card:hover {
+  border-color: var(--neon);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 200, 255, 0.08);
+}
+
+.tip-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.tip-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.tip-text {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ─── تحريكات ─── */
+.fade-in {
+  animation: fadeIn 0.4s ease;
+}
+
+.fade-in-up {
+  animation: slideUp 0.5s ease both;
+}
+
+.no-results {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--muted);
+  padding: 2rem;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .wizard-container { padding: 1.25rem; }
+  .wizard-question { font-size: 1.15rem; }
+  .wizard-options-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .wizard-option-card { padding: 1rem 0.75rem; }
+  .wizard-option-card .option-icon { font-size: 1.8rem; }
+  .wizard-option-card .option-label { font-size: 0.82rem; }
+  .results-podium { grid-template-columns: 1fr; }
+  .results-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .wizard-steps-indicator { gap: 0.25rem; }
+  .dot-label { font-size: 0.65rem; }
+  .dot-number { width: 30px; height: 30px; font-size: 0.75rem; }
+  .quick-scenarios-grid { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    Responsive — إصلاحات الموبايل
    ═══════════════════════════════════════════════════════════════ */
 
