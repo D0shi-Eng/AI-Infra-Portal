@@ -1,0 +1,99 @@
+rules_version = '2';
+
+// ═══════════════════════════════════════════════════════════════
+// قواعد أمان Firestore — AI INFRA Portal
+// ═══════════════════════════════════════════════════════════════
+// - المستخدم يقرأ بياناته فقط
+// - المستخدم ما يقدر يعدّل isPremium أو subscriptionEnd بنفسه
+// - المنتدى: القراءة والكتابة للمشتركين فقط
+// - Cloud Functions (Admin SDK) تتجاوز كل القواعد
+// ═══════════════════════════════════════════════════════════════
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─── دالة مساعدة: هل المستخدم مشترك؟ ───
+    function isPremium() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isPremium == true;
+    }
+
+    // ─── دالة مساعدة: هل المستخدم مسجّل دخول؟ ───
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    // ─── دالة مساعدة: هل هو نفس المستخدم؟ ───
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    // ═══════════════════════════════════════════════════
+    // وثائق المستخدمين — users/{userId}
+    // ═══════════════════════════════════════════════════
+    match /users/{userId} {
+      // القراءة: فقط المستخدم نفسه
+      allow read: if isOwner(userId);
+
+      // الإنشاء: المستخدم ينشئ وثيقته فقط
+      // لازم isPremium = false (ما يقدر يفعّل الاشتراك بنفسه)
+      allow create: if isOwner(userId)
+        && request.resource.data.isPremium == false
+        && request.resource.data.subscriptionEnd == null;
+
+      // التحديث: المستخدم يحدّث بياناته الأساسية فقط
+      // ممنوع يغيّر: isPremium, subscriptionEnd, joinedAt
+      allow update: if isOwner(userId)
+        && request.resource.data.isPremium == resource.data.isPremium
+        && request.resource.data.subscriptionEnd == resource.data.subscriptionEnd
+        && request.resource.data.joinedAt == resource.data.joinedAt;
+
+      // الحذف: ممنوع من العميل
+      allow delete: if false;
+    }
+
+    // ═══════════════════════════════════════════════════
+    // المنتدى — posts/{postId}
+    // ═══════════════════════════════════════════════════
+    match /posts/{postId} {
+      // القراءة: أي مسجّل دخول ومشترك
+      allow read: if isPremium();
+
+      // الإنشاء: المشتركين فقط + authorId لازم يطابق uid
+      allow create: if isPremium()
+        && request.resource.data.authorId == request.auth.uid
+        && request.resource.data.title is string
+        && request.resource.data.title.size() >= 3
+        && request.resource.data.body is string
+        && request.resource.data.body.size() >= 10;
+
+      // التحديث: الكاتب (likes وlikedBy) أو أي مشترك (للإعجاب)
+      allow update: if isPremium();
+
+      // الحذف: الكاتب فقط
+      allow delete: if isPremium()
+        && resource.data.authorId == request.auth.uid;
+
+      // ─── الردود — posts/{postId}/replies/{replyId} ───
+      match /replies/{replyId} {
+        allow read: if isPremium();
+
+        allow create: if isPremium()
+          && request.resource.data.authorId == request.auth.uid
+          && request.resource.data.body is string
+          && request.resource.data.body.size() >= 1;
+
+        allow delete: if isPremium()
+          && resource.data.authorId == request.auth.uid;
+      }
+    }
+
+    // ═══════════════════════════════════════════════════
+    // أي مجموعة أخرى — ممنوع بالكامل
+    // ═══════════════════════════════════════════════════
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

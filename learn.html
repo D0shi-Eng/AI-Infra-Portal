@@ -2,16 +2,15 @@
 <html lang="ar" dir="rtl">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>(function () { var l = localStorage.getItem('lang'); if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; } })()</script>
-  <title>Models • AI INFRA</title>
-  <meta name="description" content="دليل نماذج الذكاء الاصطناعي مع متطلبات التشغيل RAM و VRAM وفلاتر ذكية للبحث والمقارنة | AI INFRA">
-  <meta property="og:title" content="دليل النماذج • AI INFRA">
-  <meta property="og:description" content="استعرض أكثر من 209 نموذج ذكاء اصطناعي مع فلاتر ذكية ومتطلبات التشغيل">
+  <title>تعلّم AI • AI INFRA</title>
+  <meta name="description" content="تعلّم الذكاء الاصطناعي — كورسات مجانية مجمّعة من أفضل الجامعات والمنصات | AI INFRA">
+  <meta property="og:title" content="تعلّم الذكاء الاصطناعي • AI INFRA">
+  <meta property="og:description" content="كورسات مجانية من Harvard، Stanford، Google، Microsoft، Hugging Face وأكثر">
   <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
-
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/theme.css">
   <link rel="stylesheet" href="assets/css/layout.css">
@@ -45,47 +44,42 @@
   </header>
 
   <main id="main" class="container">
-    <h1 class="page-title" data-i18n="models_title"></h1>
-    <p class="page-subtitle" data-i18n="models_subtitle"></p>
+    <h1 class="page-title" data-i18n="learn_title">تعلّم الذكاء الاصطناعي</h1>
+    <p class="page-subtitle" data-i18n="learn_subtitle">كورسات مجانية مجمّعة من أفضل الجامعات والمنصات العالمية</p>
 
-    <section class="toolbar">
-      <div class="search-row">
-        <input id="searchInput" class="input" type="text" data-i18n-placeholder="search_placeholder"
-          placeholder="ابحث باسم النموذج أو الشركة أو النوع…" />
-      </div>
-      <div class="search-row">
-        <select id="typeSelect" class="select"></select>
-        <select id="providerSelect" class="select"></select>
-        <select id="modalitySelect" class="select"></select>
-        <select id="licenseSelect" class="select"></select>
-        <button id="resetBtn" class="btn" data-i18n="filter_reset"></button>
-      </div>
-      <div class="actions-row">
-        <select id="sortSelect" class="select" style="max-width:200px;" aria-label="ترتيب النماذج"></select>
-        <button id="favFilterBtn" class="btn" style="min-width:auto;" aria-label="عرض المفضلة">★</button>
-        <span class="muted" id="countLabel"></span>
-      </div>
-    </section>
+    <!-- فلاتر -->
+    <div class="actions-row">
+      <input type="search" id="courseSearch" class="search-input" data-i18n-placeholder="learn_search_placeholder" placeholder="ابحث عن كورس...">
+      <select id="levelFilter" class="filter-select">
+        <option value="" data-i18n="learn_all_levels">كل المستويات</option>
+        <option value="beginner" data-i18n="learn_beginner">مبتدئ</option>
+        <option value="intermediate" data-i18n="learn_intermediate">متوسط</option>
+        <option value="advanced" data-i18n="learn_advanced">متقدم</option>
+      </select>
+      <select id="categoryFilter" class="filter-select">
+        <option value="" data-i18n="learn_all_categories">كل التصنيفات</option>
+        <option value="general" data-i18n="learn_cat_general">عام</option>
+        <option value="ml" data-i18n="learn_cat_ml">تعلّم الآلة</option>
+        <option value="deep-learning" data-i18n="learn_cat_dl">تعلّم عميق</option>
+        <option value="nlp" data-i18n="learn_cat_nlp">معالجة لغة</option>
+        <option value="cv" data-i18n="learn_cat_cv">رؤية حاسوبية</option>
+        <option value="llm" data-i18n="learn_cat_llm">نماذج لغوية كبيرة</option>
+        <option value="image" data-i18n="learn_cat_image">توليد صور</option>
+        <option value="rl" data-i18n="learn_cat_rl">تعلّم معزّز</option>
+      </select>
+    </div>
 
-    <div class="hr"></div>
+    <p class="muted" id="courseCount"></p>
 
-    <p id="emptyState" class="muted" style="display:none;"></p>
-    <section class="grid" id="grid"></section>
-
-    <!-- ترقيم الصفحات -->
-    <nav class="pagination" id="pagination" aria-label="ترقيم الصفحات" style="display:none;">
-      <button id="prevPage" class="btn" type="button" disabled>السابق</button>
-      <span id="pageInfo" class="muted"></span>
-      <button id="nextPage" class="btn" type="button" disabled>التالي</button>
-    </nav>
+    <!-- شبكة الكورسات -->
+    <div class="grid reveal-stagger" id="coursesGrid"></div>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
       <div>
         <div class="footer-brand">AI INFRA</div>
-        <p class="footer-desc" data-i18n="footer_desc">منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء
-          الاصطناعي.</p>
+        <p class="footer-desc" data-i18n="footer_desc">منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء الاصطناعي وربطها بالبنية التحتية المناسبة.</p>
       </div>
       <div>
         <div class="footer-heading" data-i18n="footer_nav">التنقّل</div>
@@ -126,19 +120,12 @@
     </div>
   </footer>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="assets/js/theme.js"></script>
   <script src="assets/js/i18n.js?v=3"></script>
   <script src="assets/js/firebase-config.js"></script>
   <script src="assets/js/auth.js"></script>
   <script src="assets/js/app.js"></script>
-
-  <script src="assets/js/models-data.js"></script>
-  <script src="assets/js/router.js"></script>
-  <script src="assets/js/render.js"></script>
+  <script src="assets/js/learn-page.js"></script>
 </body>
 
 </html>

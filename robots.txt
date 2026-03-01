@@ -1,0 +1,8 @@
+# robots.txt — ملف توجيه زاحف محركات البحث
+# يسمح لجميع المحركات بفهرسة الموقع ويشير إلى خريطة الموقع
+
+User-agent: *
+Allow: /
+
+# خريطة الموقع
+Sitemap: https://d0shi-eng.github.io/AI-Infra-Portal/sitemap.xml

@@ -25,6 +25,7 @@ function initElements() {
   const notesBodyEl = document.getElementById("notesBody");
   const badgesEl = document.getElementById("badges");
   const reqNoteEl = document.getElementById("reqNote");
+  const breadcrumbModel = document.getElementById("breadcrumbModel");
 
   const accordionItems = Array.from(
     document.querySelectorAll(".accordion-item")
@@ -38,6 +39,7 @@ function initElements() {
     reqBodyEl,
     notesBodyEl,
     badgesEl,
+    breadcrumbModel,
     reqNoteEl,
     accordionItems,
   };
@@ -214,6 +216,9 @@ function renderModel(ctx, model) {
   if (ctx.statusEl) ctx.statusEl.textContent = "";
   if (ctx.nameEl) ctx.nameEl.textContent = model.name || "";
 
+  // تحديث مسار التنقل (Breadcrumb) باسم النموذج
+  if (ctx.breadcrumbModel) ctx.breadcrumbModel.textContent = model.name || "—";
+
   // مواصفات
   if (ctx.specBodyEl) {
     appendMeta(ctx.specBodyEl, "Provider", model.provider || "-");
@@ -303,6 +308,7 @@ function renderModel(ctx, model) {
 
   setPageSeo(model);
   addShareButton(model);
+  addCopySpecsButton(model);
 }
 
 function setPageSeo(model) {
@@ -379,6 +385,64 @@ function fallbackCopy(url, btn) {
     setTimeout(() => { btn.textContent = I18N.t("btn_share"); }, 2000);
   } catch (_) {}
   document.body.removeChild(ta);
+}
+
+/**
+ * زر نسخ المواصفات كنص منسق للمشاركة
+ * ينسخ اسم النموذج والمزود والنوع والمتطلبات بصيغة نصية مرتبة
+ */
+function addCopySpecsButton(model) {
+  const container = document.querySelector(".container");
+  const existing = document.getElementById("modelCopySpecsBtn");
+  if (existing || !container) return;
+
+  const btn = document.createElement("button");
+  btn.id = "modelCopySpecsBtn";
+  btn.type = "button";
+  btn.className = "btn";
+  btn.textContent = I18N.t("copy_specs");
+  btn.style.marginBottom = "12px";
+  btn.style.marginInlineStart = "8px";
+
+  btn.addEventListener("click", function () {
+    // بناء النص المنسق بأمان — بدون innerHTML
+    var lines = [];
+    lines.push("📋 " + (model.name || "—"));
+    lines.push("🏢 " + (model.provider || "—"));
+    lines.push("📂 " + (model.type || "—"));
+    if (model.paramsB) lines.push("⚙️ " + model.paramsB + "B params");
+    if (model.contextK) lines.push("📏 " + model.contextK + "K context");
+    if (model.recommendedVramGb) lines.push("🎮 VRAM: " + model.recommendedVramGb + " GB");
+    if (model.recommendedRamGb) lines.push("💾 RAM: " + model.recommendedRamGb + " GB");
+    lines.push("📜 " + (model.license || "—"));
+    lines.push("🔗 " + location.href);
+
+    var text = lines.join("\n");
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = I18N.t("copy_specs_done");
+        setTimeout(function () { btn.textContent = I18N.t("copy_specs"); }, 2000);
+      }).catch(function () { fallbackCopy(text, btn); });
+    } else {
+      fallbackCopy(text, btn);
+    }
+  });
+
+  // إدراج الزر بجانب زر المشاركة
+  var shareBtn = document.getElementById("modelShareBtn");
+  if (shareBtn && shareBtn.nextSibling) {
+    container.insertBefore(btn, shareBtn.nextSibling);
+  } else if (shareBtn) {
+    shareBtn.parentNode.insertBefore(btn, shareBtn.nextSibling);
+  } else {
+    var firstLink = container.querySelector("a.btn");
+    if (firstLink && firstLink.nextSibling) {
+      container.insertBefore(btn, firstLink.nextSibling);
+    } else {
+      container.insertBefore(btn, container.firstChild);
+    }
+  }
 }
 
 /**

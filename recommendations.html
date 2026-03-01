@@ -6,6 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>(function () { var l = localStorage.getItem('lang'); if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; } })()</script>
   <title>Recommendations • AI INFRA</title>
+  <meta name="description" content="توصيات تجميعات عتاد AI حسب المستوى والميزانية مع أسعار تقريبية | AI INFRA">
+  <meta property="og:title" content="التوصيات • AI INFRA">
+  <meta property="og:description" content="تجميعات مقترحة حسب مستواك مع سعر تقريبي">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/theme.css">
   <link rel="stylesheet" href="assets/css/layout.css">
@@ -24,13 +29,15 @@
         <a href="hardware.html" data-i18n="nav_hardware"></a>
         <a href="compare.html" data-i18n="nav_compare"></a>
         <a href="calculator.html" data-i18n="nav_calc"></a>
-        <a href="lessons.html" data-i18n="nav_lessons"></a>
-        <a href="recommendations.html" data-i18n="nav_recommendations"></a>
+        <a href="learn.html" data-i18n="nav_learn"></a>
+        <a href="forum.html" data-i18n="nav_forum"></a>
         <a href="ask.html" data-i18n="nav_ask"></a>
+        <a href="pricing.html" data-i18n="nav_pricing"></a>
         <a href="about.html" data-i18n="nav_about"></a>
       </nav>
     </div>
     <div class="controls">
+      <div id="authArea"></div>
       <button id="langToggle" type="button" aria-label="تبديل اللغة">EN</button>
       <button id="themeToggle" type="button" aria-label="تبديل الوضع الليلي">☀</button>
     </div>
@@ -84,15 +91,16 @@
         <ul class="footer-links">
           <li><a href="compare.html" data-i18n="nav_compare">مقارنة GPU</a></li>
           <li><a href="calculator.html" data-i18n="nav_calc">حاسبة</a></li>
-          <li><a href="lessons.html" data-i18n="nav_lessons">الدروس</a></li>
-          <li><a href="recommendations.html" data-i18n="nav_recommendations">التوصيات</a></li>
+          <li><a href="learn.html" data-i18n="nav_learn">تعلّم AI</a></li>
+          <li><a href="forum.html" data-i18n="nav_forum">المنتدى</a></li>
           <li><a href="about.html" data-i18n="nav_about">عن المنصة</a></li>
         </ul>
       </div>
       <div>
-        <div class="footer-heading" data-i18n="footer_soon">قريباً</div>
+        <div class="footer-heading" data-i18n="footer_premium">المميز</div>
         <ul class="footer-links">
-          <li><a href="https://github.com/D0shi-Eng/AI-Infra-Portal/discussions" target="_blank" rel="noopener noreferrer" data-i18n="footer_community">المجتمع</a></li>
+          <li><a href="ask.html" data-i18n="nav_ask">اسأل AI</a></li>
+          <li><a href="pricing.html" data-i18n="nav_pricing">الاشتراك</a></li>
         </ul>
       </div>
     </div>
@@ -109,8 +117,14 @@
     </div>
   </footer>
 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="assets/js/theme.js"></script>
-  <script src="assets/js/i18n.js?v=2"></script>
+  <script src="assets/js/i18n.js?v=3"></script>
+  <script src="assets/js/firebase-config.js"></script>
+  <script src="assets/js/auth.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 

@@ -1,0 +1,23 @@
+# ═══════════════════════════════════════════════════════════
+# .gitignore — AI INFRA Portal
+# ═══════════════════════════════════════════════════════════
+
+# Firebase
+firebase-debug.log
+.firebase/
+
+# Cloud Functions
+functions/node_modules/
+functions/.env
+functions/lib/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo

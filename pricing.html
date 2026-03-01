@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>(function () { var l = localStorage.getItem('lang'); if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; } })()</script>
+  <title>الاشتراك • AI INFRA</title>
+  <meta name="description" content="اشترك في AI INFRA للوصول إلى المنتدى والمحادثة مع الذكاء الاصطناعي | بداية من 19 ريال شهرياً">
+  <meta property="og:title" content="خطط الاشتراك • AI INFRA">
+  <meta property="og:description" content="اشترك وانضم لمجتمع AI INFRA — منتدى حصري + محادثة AI | 19 ريال/شهر أو 99 ريال/سنة">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+
+<body>
+  <a href="#main" class="skip-link" data-i18n="skip_link">انتقال للمحتوى</a>
+  <header class="navbar">
+    <div class="nav-left">
+      <div class="logo" data-i18n="brand">AI INFRA</div>
+      <nav class="nav-links">
+        <a href="index.html" data-i18n="nav_home"></a>
+        <a href="models.html" data-i18n="nav_models"></a>
+        <a href="hardware.html" data-i18n="nav_hardware"></a>
+        <a href="compare.html" data-i18n="nav_compare"></a>
+        <a href="calculator.html" data-i18n="nav_calc"></a>
+        <a href="learn.html" data-i18n="nav_learn"></a>
+        <a href="forum.html" data-i18n="nav_forum"></a>
+        <a href="ask.html" data-i18n="nav_ask"></a>
+        <a href="pricing.html" data-i18n="nav_pricing"></a>
+        <a href="about.html" data-i18n="nav_about"></a>
+      </nav>
+    </div>
+    <div class="controls">
+      <div id="authArea"></div>
+      <button id="langToggle" type="button" aria-label="تبديل اللغة">EN</button>
+      <button id="themeToggle" type="button" aria-label="تبديل الوضع الليلي">☀</button>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <h1 class="page-title" data-i18n="pricing_title">خطط الاشتراك</h1>
+    <p class="page-subtitle" data-i18n="pricing_subtitle">اختر الخطة المناسبة وانضم لمجتمع AI INFRA</p>
+
+    <div class="pricing-grid">
+      <!-- الخطة المجانية -->
+      <article class="neon-card pricing-card">
+        <div class="pricing-header">
+          <h2 data-i18n="pricing_free_title">مجاني</h2>
+          <div class="pricing-price">
+            <span class="pricing-amount">0</span>
+            <span class="pricing-currency" data-i18n="pricing_currency">ريال</span>
+          </div>
+        </div>
+        <ul class="pricing-features">
+          <li data-i18n="pricing_free_f1">✅ دليل النماذج (209+ نموذج)</li>
+          <li data-i18n="pricing_free_f2">✅ حاسبة المتطلبات</li>
+          <li data-i18n="pricing_free_f3">✅ مقارنة كروت الشاشة</li>
+          <li data-i18n="pricing_free_f4">✅ إرشادات الهاردوير</li>
+          <li data-i18n="pricing_free_f5">✅ صفحة تعلّم AI</li>
+          <li data-i18n="pricing_free_f6">❌ المنتدى</li>
+          <li data-i18n="pricing_free_f7">❌ اسأل AI</li>
+        </ul>
+        <a href="models.html" class="btn pricing-btn" data-i18n="pricing_free_btn">استكشف مجاناً</a>
+      </article>
+
+      <!-- الخطة الشهرية -->
+      <article class="neon-card pricing-card pricing-card-featured">
+        <div class="pricing-popular" data-i18n="pricing_popular">الأكثر شعبية</div>
+        <div class="pricing-header">
+          <h2 data-i18n="pricing_monthly_title">شهري</h2>
+          <div class="pricing-price">
+            <span class="pricing-amount">19</span>
+            <span class="pricing-currency" data-i18n="pricing_per_month">ريال/شهر</span>
+          </div>
+        </div>
+        <ul class="pricing-features">
+          <li data-i18n="pricing_pro_f1">✅ كل مميزات المجاني</li>
+          <li data-i18n="pricing_pro_f2">✅ المنتدى الحصري</li>
+          <li data-i18n="pricing_pro_f3">✅ اسأل AI (محادثة ذكية)</li>
+          <li data-i18n="pricing_pro_f4">✅ أولوية الدعم</li>
+          <li data-i18n="pricing_pro_f5">✅ محتوى حصري قادم</li>
+        </ul>
+        <button type="button" class="btn cta-btn pricing-btn" id="monthlyBtn" data-i18n="pricing_subscribe_monthly">اشترك شهرياً — 19 ريال</button>
+      </article>
+
+      <!-- الخطة السنوية -->
+      <article class="neon-card pricing-card">
+        <div class="pricing-save" data-i18n="pricing_save">وفّر 57%</div>
+        <div class="pricing-header">
+          <h2 data-i18n="pricing_yearly_title">سنوي</h2>
+          <div class="pricing-price">
+            <span class="pricing-amount">99</span>
+            <span class="pricing-currency" data-i18n="pricing_per_year">ريال/سنة</span>
+          </div>
+          <p class="pricing-equiv" data-i18n="pricing_equiv">≈ 8.25 ريال/شهر</p>
+        </div>
+        <ul class="pricing-features">
+          <li data-i18n="pricing_pro_f1">✅ كل مميزات المجاني</li>
+          <li data-i18n="pricing_pro_f2">✅ المنتدى الحصري</li>
+          <li data-i18n="pricing_pro_f3">✅ اسأل AI (محادثة ذكية)</li>
+          <li data-i18n="pricing_pro_f4">✅ أولوية الدعم</li>
+          <li data-i18n="pricing_pro_f5">✅ محتوى حصري قادم</li>
+        </ul>
+        <button type="button" class="btn cta-btn pricing-btn" id="yearlyBtn" data-i18n="pricing_subscribe_yearly">اشترك سنوياً — 99 ريال</button>
+      </article>
+    </div>
+
+    <!-- أسئلة شائعة -->
+    <section class="pricing-faq reveal">
+      <h2 data-i18n="pricing_faq_title">أسئلة شائعة</h2>
+      <div class="faq-list">
+        <details class="neon-card faq-item">
+          <summary data-i18n="pricing_faq_q1">كيف أشترك؟</summary>
+          <p data-i18n="pricing_faq_a1">سجّل دخولك بحساب Google أو بريدك الإلكتروني، ثم اختر الخطة المناسبة. سيتم توجيهك لصفحة الدفع الآمنة.</p>
+        </details>
+        <details class="neon-card faq-item">
+          <summary data-i18n="pricing_faq_q2">هل أقدر ألغي الاشتراك؟</summary>
+          <p data-i18n="pricing_faq_a2">نعم، تقدر تلغي في أي وقت. اشتراكك يستمر حتى نهاية الفترة المدفوعة.</p>
+        </details>
+        <details class="neon-card faq-item">
+          <summary data-i18n="pricing_faq_q3">وش المحتوى الحصري؟</summary>
+          <p data-i18n="pricing_faq_a3">المنتدى للنقاش مع المجتمع، ومحادثة AI لسؤال نموذج ذكاء اصطناعي عن البنية التحتية والنماذج. محتوى إضافي قادم مستقبلاً.</p>
+        </details>
+        <details class="neon-card faq-item">
+          <summary data-i18n="pricing_faq_q4">هل الدفع آمن؟</summary>
+          <p data-i18n="pricing_faq_a4">نعم، نستخدم بوابة دفع معتمدة ومشفرة. لا نخزّن بيانات بطاقتك على خوادمنا.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">AI INFRA</div>
+        <p class="footer-desc" data-i18n="footer_desc">منصة تقنية متخصصة لتبسيط فهم متطلبات تشغيل نماذج الذكاء الاصطناعي وربطها بالبنية التحتية المناسبة.</p>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_nav">التنقّل</div>
+        <ul class="footer-links">
+          <li><a href="index.html" data-i18n="nav_home">الرئيسية</a></li>
+          <li><a href="models.html" data-i18n="nav_models">النماذج</a></li>
+          <li><a href="hardware.html" data-i18n="nav_hardware">الهاردوير</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_tools">الأدوات</div>
+        <ul class="footer-links">
+          <li><a href="compare.html" data-i18n="nav_compare">مقارنة GPU</a></li>
+          <li><a href="calculator.html" data-i18n="nav_calc">حاسبة</a></li>
+          <li><a href="learn.html" data-i18n="nav_learn">تعلّم AI</a></li>
+          <li><a href="forum.html" data-i18n="nav_forum">المنتدى</a></li>
+          <li><a href="about.html" data-i18n="nav_about">عن المنصة</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer_premium">المميز</div>
+        <ul class="footer-links">
+          <li><a href="ask.html" data-i18n="nav_ask">اسأل AI</a></li>
+          <li><a href="pricing.html" data-i18n="nav_pricing">الاشتراك</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© <span id="footerYear">2026</span> AI INFRA. <span data-i18n="footer_updated">آخر تحديث: الأحد 1 مارس 2026</span></span>
+      <div class="footer-badge-group">
+        <span class="footer-badge">⚡ Static-First • GitHub Pages</span>
+        <div class="footer-credit">
+        <p data-i18n="footer_credit">Built and developed by: Eng:Abdulrahman</p>
+        <p>📧 <span data-i18n="footer_contact">Contact:</span> <a href="mailto:abdulrahmand19@hotmail.com">abdulrahmand19@hotmail.com</a></p>
+        <p>X: <a href="https://x.com/Abdulr3hm33n" target="_blank" rel="noopener noreferrer">@Abdulr3hm33n</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/i18n.js?v=3"></script>
+  <script src="assets/js/firebase-config.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    /**
+     * أزرار الاشتراك — تتصل بـ Cloud Function لإنشاء جلسة Stripe Checkout
+     * إذا لم يتم إعداد Stripe بعد، تعرض رسالة "قيد التجهيز"
+     */
+    document.addEventListener("DOMContentLoaded", function () {
+      var monthlyBtn = document.getElementById("monthlyBtn");
+      var yearlyBtn = document.getElementById("yearlyBtn");
+      var FUNCTIONS_URL = "https://us-central1-ai-infra-724f0.cloudfunctions.net";
+
+      // التحقق من نتيجة الدفع (رجوع من Stripe)
+      var params = new URLSearchParams(window.location.search);
+      if (params.get("payment") === "success") {
+        showNotice("success", I18N.t("pricing_payment_success") || "تم الاشتراك بنجاح! 🎉");
+        window.history.replaceState({}, "", "pricing.html");
+      } else if (params.get("payment") === "cancel") {
+        showNotice("cancel", I18N.t("pricing_payment_cancel") || "تم إلغاء عملية الدفع.");
+        window.history.replaceState({}, "", "pricing.html");
+      }
+
+      function showNotice(type, msg) {
+        var el = document.createElement("div");
+        el.style.cssText = "position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:9999;padding:14px 28px;border-radius:12px;font-weight:700;font-size:0.95rem;animation:slideUp .3s ease;";
+        el.style.background = type === "success" ? "rgba(0,255,136,0.15)" : "rgba(255,136,0,0.15)";
+        el.style.border = type === "success" ? "1px solid rgba(0,255,136,0.3)" : "1px solid rgba(255,136,0,0.3)";
+        el.style.color = type === "success" ? "#00ff88" : "#ff8800";
+        el.textContent = msg;
+        document.body.appendChild(el);
+        setTimeout(function () { el.remove(); }, 5000);
+      }
+
+      async function handleSubscribe(plan) {
+        var user = Auth.getUser();
+        if (!user) {
+          Auth.signInWithGoogle();
+          return;
+        }
+
+        // تغيير حالة الزر
+        var btn = plan === "monthly" ? monthlyBtn : yearlyBtn;
+        var origText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = I18N.t("loading") || "جارٍ التحميل…";
+
+        try {
+          var token = await user.getIdToken();
+          var res = await fetch(FUNCTIONS_URL + "/createCheckoutSession", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify({
+              plan: plan,
+              successUrl: window.location.origin + window.location.pathname + "?payment=success",
+              cancelUrl: window.location.origin + window.location.pathname + "?payment=cancel"
+            })
+          });
+
+          var data = await res.json();
+
+          if (data.url) {
+            // توجيه لصفحة الدفع في Stripe
+            window.location.href = data.url;
+          } else {
+            // Stripe غير مُعدّ بعد
+            alert(I18N.t("pricing_coming_soon"));
+          }
+        } catch (err) {
+          console.error("خطأ في الاشتراك:", err);
+          alert(I18N.t("pricing_coming_soon"));
+        } finally {
+          btn.disabled = false;
+          btn.textContent = origText;
+        }
+      }
+
+      if (monthlyBtn) monthlyBtn.addEventListener("click", function () { handleSubscribe("monthly"); });
+      if (yearlyBtn) yearlyBtn.addEventListener("click", function () { handleSubscribe("yearly"); });
+    });
+  </script>
+</body>
+
+</html>
